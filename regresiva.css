@@ -59,3 +59,62 @@ a{
 .boton_menu :hover{
     color: white;
 }
+#mensajeSecreto {
+  position: fixed;
+  bottom: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ff7675;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 15px;
+  font-size: 16px;
+  transition: 0.5s;
+  opacity: 0;
+}
+
+/* cuando aparece */
+#mensajeSecreto.mostrar {
+  bottom: 20px;
+  opacity: 1;
+}
+#mensajeRocy {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+  color: #333;
+  padding: 20px 30px;
+  border-radius: 20px;
+  font-size: 18px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  transition: 0.4s;
+  opacity: 0;
+}
+
+/* cuando aparece */
+#mensajeRocy.mostrar {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+#mensajeSecreto {
+  position: fixed;
+  bottom: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #111;
+  color: #00ffe0;
+  padding: 15px 25px;
+  border-radius: 15px;
+  font-size: 18px;
+  transition: 0.5s;
+  opacity: 0;
+  box-shadow: 0 0 15px #00ffe0;
+}
+
+#mensajeSecreto.mostrar {
+  bottom: 30px;
+  opacity: 1;
+}

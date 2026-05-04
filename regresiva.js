@@ -40,3 +40,44 @@ function actualicar(tiempo){
 window.onload = () =>{
     iniciarCuenta();
 }
+document.querySelector("h1").addEventListener("dblclick", () =>{
+    let msg  = document.getElementById("mensajeSecreto");
+    msg.classList.add("mostrar");
+    setTimeout(() =>{
+        msg.classList.remove("mostrar");
+    }, 4000);
+});
+
+let clave = "";
+document.addEventListener("keydown", (e) =>{
+    clave += e.key.toLowerCase();
+    if(clave.includes("rocy")){
+        let msg = document.getElementById("mensajeRocy");
+        msg.classList.add("mostrar");
+        setTimeout(() =>{
+            msg.classList.remove("mostrar");
+        }, 5000);
+        clave = ""
+    }
+    if(clave.length > 10) clave = "";
+});
+
+let clave = "";
+
+document.addEventListener("keydown", (e) => {
+  clave += e.key.toLowerCase();
+
+  if (clave.includes("gus")) {
+    let msg = document.getElementById("mensajeSecreto");
+
+    msg.classList.add("mostrar");
+
+    setTimeout(() => {
+      msg.classList.remove("mostrar");
+    }, 4000);
+
+    clave = "";
+  }
+
+  if (clave.length > 10) clave = "";
+});
