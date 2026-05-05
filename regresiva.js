@@ -61,23 +61,3 @@ document.addEventListener("keydown", (e) =>{
     }
     if(clave.length > 10) clave = "";
 });
-
-let clave = "";
-
-document.addEventListener("keydown", (e) => {
-  clave += e.key.toLowerCase();
-
-  if (clave.includes("gus")) {
-    let msg = document.getElementById("mensajeSecreto");
-
-    msg.classList.add("mostrar");
-
-    setTimeout(() => {
-      msg.classList.remove("mostrar");
-    }, 4000);
-
-    clave = "";
-  }
-
-  if (clave.length > 10) clave = "";
-});

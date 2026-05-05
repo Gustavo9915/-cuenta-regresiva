@@ -5,7 +5,8 @@ body {
   justify-content: center;
   align-items: center;
   background: #1e1e2f;
-  font-family: Arial, sans-serif;
+ font-family: Arial;
+font-family: "Edu NSW ACT Cursive", cursive;
   color: white;
 }
 
