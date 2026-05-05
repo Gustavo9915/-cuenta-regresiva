@@ -1,63 +1,92 @@
-let tiempo = 0;
-let intervalo = null;
+let intervalo;
+let mensajeActivo = false;
 
-function iniciarCuenta(){
-    if(intervalo) return;
+window.onload = () => {
+  iniciarCuenta();
+};
 
-    let dias = parseInt(prompt("dias: ")) || 0;
-    let horas = parseInt(prompt("Horas:")) || 0;
-    let minutos = parseInt(prompt("Minutos:")) || 0;
-    let segundos = parseInt(prompt("Segundos:")) || 0
+// 🔥 CONTADOR
+function iniciarCuenta() {
+  let objetivo = new Date("2026-05-10T00:00:00");
 
-    let objetivo = new Date();
-    objetivo.setDate(objetivo.getDate() + 6);
+  let contador = document.getElementById("contador");
+  let link = document.getElementById("linkEvento");
 
-    intervalo = setInterval(() =>{
-        let ahora = new Date();
-        let diferencia = Math.floor((objetivo - ahora) / 1000);
+  intervalo = setInterval(() => {
 
-        if(diferencia <= 0){
-            clearInterval(intervalo);
-            document.getElementById("contador").textContent = "00d 00h 00m 00s";
-            alert("evento activo");
-            return;
-        }
-        actualicar(diferencia);
-    }, 1000);
+    // ⛔ si hay mensaje activo, no actualizar contador
+    if (mensajeActivo) return;
+
+    let ahora = new Date();
+    let diferencia = Math.floor((objetivo - ahora) / 1000);
+
+    if (diferencia <= 0) {
+      clearInterval(intervalo);
+
+      contador.textContent = "🎉 YA DISPONIBLE 🎉";
+
+      link.classList.remove("bloqueado");
+      link.classList.add("activo");
+
+      return;
+    }
+
+    let d = Math.floor(diferencia / 86400);
+    let h = Math.floor((diferencia % 86400) / 3600);
+    let m = Math.floor((diferencia % 3600) / 60);
+    let s = diferencia % 60;
+
+    contador.textContent =
+      `${String(d).padStart(2, "0")}d ` +
+      `${String(h).padStart(2, "0")}h ` +
+      `${String(m).padStart(2, "0")}m ` +
+      `${String(s).padStart(2, "0")}s`;
+
+  }, 1000);
 }
-function actualicar(tiempo){
-    let d = Math.floor(tiempo / 86400);
-    let h = Math.floor((tiempo % 86400) / 3600);
-    let m = Math.floor((tiempo % 3600) / 60);
-    let s = tiempo % 60;
 
-    document.getElementById("contador").textContent = 
-        `${String(d).padStart(2, "0")}d ` +
-        `${String(h).padStart(2, "0")}h ` +
-        `${String(m).padStart(2, "0")}m ` +
-        `${String(s).padStart(2, "0")}s`;
-}
-window.onload = () =>{
-    iniciarCuenta();
-}
-document.querySelector("h1").addEventListener("dblclick", () =>{
-    let msg  = document.getElementById("mensajeSecreto");
-    msg.classList.add("mostrar");
-    setTimeout(() =>{
-        msg.classList.remove("mostrar");
-    }, 4000);
+//
+// 🔐 CÓDIGO SECRETO: "evento"
+//
+let clave = "";
+
+document.addEventListener("keydown", (e) => {
+  clave += e.key.toLowerCase();
+
+  if (clave.includes("evento")) {
+    activarEvento();
+    clave = "";
+  }
+
+  if (clave.length > 10) clave = "";
 });
 
-let clave = "";
-document.addEventListener("keydown", (e) =>{
-    clave += e.key.toLowerCase();
-    if(clave.includes("rocy")){
-        let msg = document.getElementById("mensajeRocy");
-        msg.classList.add("mostrar");
-        setTimeout(() =>{
-            msg.classList.remove("mostrar");
-        }, 5000);
-        clave = ""
-    }
-    if(clave.length > 10) clave = "";
+//
+// 🚀 ACTIVAR EVENTO MANUAL
+//
+function activarEvento() {
+  let link = document.getElementById("linkEvento");
+  let contador = document.getElementById("contador");
+
+  // desbloquear botón
+  link.classList.remove("bloqueado");
+  link.classList.add("activo");
+
+  // mostrar mensaje
+  mensajeActivo = true;
+  contador.textContent = "🎉 EVENTO DESBLOQUEADO 🎉";
+
+  // ⏳ mantener 1 minuto
+  setTimeout(() => {
+    mensajeActivo = false;
+  }, 60000);
+}
+document.getElementById("contador").addEventListener("dblclick", () => {
+  let msg = document.getElementById("mensajeSecreto");
+
+  msg.classList.add("mostrar");
+
+  setTimeout(() => {
+    msg.classList.remove("mostrar");
+  }, 4000); // dura 4 segundos
 });

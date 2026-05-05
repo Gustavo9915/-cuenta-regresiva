@@ -1,40 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cuenta regresiva</title>
-    <link rel="stylesheet" href="regresiva.css">
-      <link rel="icon " type="image/x-icon" href="img/jackie2.jpg">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Cursive:wght@400..700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Evento</title>
+  <link rel="stylesheet" href="estilos.css">
+  <link rel="stylesheet" href="regresiva.css">
 </head>
 <body>
-    <div class="contenedor">
-        <h1>cuenta regresiva</h1>
-    <div id="contador">00d 00h 00m 00s</div>
-    <div class="botones">
-        <button onclick="iniciarCuenta()">iniciar</button>
-        <button onclick="detenerCuenta()">detener</button>
-        <button onclick="reiniciarCuenta()">reiniciar</button>
-    </div>
-    <h2>💐 Especial Día de las Madres 💐</h2>
-    <p>Estoy preparando dibujos especiales para este día 💖</p>
-    <p>Disponible en:</p>
-    <!--<li><a href="http://127.0.0.1:5501/tienda.html" target="_blank"><button class="boton_menu">evento</button></a></li>-->
-    </div>
-    <div id="mensajeSecreto">
-        💐 Evento especial Día de las Madres 💖  
-        ¡Habrá dibujos únicos y promociones!
-    </div>
-    <div id="mensajeRocy">
-        mas eventos proximamente en desarrollo
-    </div>
-    <div id="mensajeSecreto">
-        👀 Encontraste el secreto…
-    </div>
-    <script src="regresiva.js"></script>
-    
+
+  <h1>💐 Evento Día de las Madres 💐</h1>
+  <p>Disponible en:</p>
+
+  <div id="contador">Cargando...</div>
+
+  <ul>
+    <li>
+      <a href="tienda.html" id="linkEvento" class="bloqueado">
+        <button class="boton_menu">Evento</button>
+      </a>
+    </li>
+  </ul>
+  <div id="mensajeSecreto">
+    👀 Prepárate… algo especial está por venir 💐
+ </div>
+
+  <script src="regresiva.js"></script>
 </body>
 </html>

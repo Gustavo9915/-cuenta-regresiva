@@ -1,104 +1,41 @@
 body {
-  margin: 0;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #1e1e2f;
- font-family: Arial;
-font-family: "Edu NSW ACT Cursive", cursive;
-  color: white;
-}
-
-.contenedor {
   text-align: center;
-  background: #2c2c3e;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  background: #1e1e2f;
+  color: white;
+  font-family: Arial;
 }
 
+/* contador */
 #contador {
-  font-size: 3em;
-  margin: 20px 0;
-  letter-spacing: 3px;
+  font-size: 2em;
+  margin: 20px;
 }
 
-.botones button {
-  margin: 5px;
-  padding: 10px 15px;
+/* botón */
+.boton_menu {
+  padding: 10px 20px;
   font-size: 16px;
   border: none;
   border-radius: 10px;
-  cursor: pointer;
   background: #0984e3;
   color: white;
-  transition: 0.2s;
 }
 
-.botones button:hover {
-  background: #1aa0ff;
+/* 🔒 BLOQUEADO REAL */
+.bloqueado {
+  pointer-events: none;
+  opacity: 0.5;
 }
 
-.botones button:active {
-  transform: scale(0.9);
-}
-a{
-    text-decoration: none;
-}
-.boton_menu{
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    background-color: #273cf5;
-    color: white;
-    box-shadow: 4px, 4px, 4px, 0px rgba(0, 0, 0, 0.5);
-    /*background: linear-gradient(-45deg, rgba(#273cf5))2% rgba(106, 17, 147, 1) 100%;*/
-    background: purple;
+.bloqueado button {
+  background: gray;
+  cursor: not-allowed;
 }
 
-.boton_menu :hover{
-    color: white;
-}
-#mensajeSecreto {
-  position: fixed;
-  bottom: -100px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #ff7675;
-  color: white;
-  padding: 15px 25px;
-  border-radius: 15px;
-  font-size: 16px;
-  transition: 0.5s;
-  opacity: 0;
-}
-
-/* cuando aparece */
-#mensajeSecreto.mostrar {
-  bottom: 20px;
-  opacity: 1;
-}
-#mensajeRocy {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  background: linear-gradient(45deg, #ff9a9e, #fad0c4);
-  color: #333;
-  padding: 20px 30px;
-  border-radius: 20px;
-  font-size: 18px;
-  text-align: center;
-  box-shadow: 0 0 20px rgba(0,0,0,0.3);
-  transition: 0.4s;
-  opacity: 0;
-}
-
-/* cuando aparece */
-#mensajeRocy.mostrar {
-  transform: translate(-50%, -50%) scale(1);
-  opacity: 1;
+/* 🔓 ACTIVO */
+.activo button {
+  background: #00b894;
+  cursor: pointer;
 }
 #mensajeSecreto {
   position: fixed;
@@ -109,9 +46,8 @@ a{
   color: #00ffe0;
   padding: 15px 25px;
   border-radius: 15px;
-  font-size: 18px;
-  transition: 0.5s;
   opacity: 0;
+  transition: 0.5s;
   box-shadow: 0 0 15px #00ffe0;
 }
 
