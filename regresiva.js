@@ -2,10 +2,30 @@ let intervalo;
 let mensajeActivo = false;
 
 window.onload = () => {
+
   iniciarCuenta();
+
+  // 👆 DOBLE CLICK
+  document.getElementById("contador").addEventListener("dblclick", () => {
+    mostrarMensaje();
+  });
+
+  // 🔐 CLAVE
+  document.addEventListener("keydown", (e) => {
+    clave += e.key.toLowerCase();
+
+    if (clave.includes("gus")) {
+      mostrarMensaje();
+      clave = "";
+    }
+
+    if (clave.length > 10) clave = "";
+  });
 };
 
+//
 // 🔥 CONTADOR
+//
 function iniciarCuenta() {
   let objetivo = new Date("2026-05-10T00:00:00");
 
@@ -14,7 +34,6 @@ function iniciarCuenta() {
 
   intervalo = setInterval(() => {
 
-    // ⛔ si hay mensaje activo, no actualizar contador
     if (mensajeActivo) return;
 
     let ahora = new Date();
@@ -46,47 +65,30 @@ function iniciarCuenta() {
 }
 
 //
-// 🔐 CÓDIGO SECRETO: "evento"
+// 🔥 MENSAJES
 //
-let clave = "";
+let mensajes = [
+  "👀 Prepárate… algo especial está por venir 💐",
+  "👀 Solo los curiosos encuentran esto 😎",
+  "👀 Esto es solo el inicio… 🎨",
+  "👀 Si ves esto, eres de los pocos 🔥"
+];
 
-document.addEventListener("keydown", (e) => {
-  clave += e.key.toLowerCase();
+let indice = 0;
 
-  if (clave.includes("evento")) {
-    activarEvento();
-    clave = "";
-  }
-
-  if (clave.length > 10) clave = "";
-});
-
-//
-// 🚀 ACTIVAR EVENTO MANUAL
-//
-function activarEvento() {
-  let link = document.getElementById("linkEvento");
-  let contador = document.getElementById("contador");
-
-  // desbloquear botón
-  link.classList.remove("bloqueado");
-  link.classList.add("activo");
-
-  // mostrar mensaje
-  mensajeActivo = true;
-  contador.textContent = "🎉 EVENTO DESBLOQUEADO 🎉";
-
-  // ⏳ mantener 1 minuto
-  setTimeout(() => {
-    mensajeActivo = false;
-  }, 60000);
-}
-document.getElementById("contador").addEventListener("dblclick", () => {
+function mostrarMensaje() {
   let msg = document.getElementById("mensajeSecreto");
+
+  msg.textContent = mensajes[indice];
+
+  indice++;
+  if (indice >= mensajes.length) indice = 0;
 
   msg.classList.add("mostrar");
 
   setTimeout(() => {
     msg.classList.remove("mostrar");
-  }, 4000); // dura 4 segundos
-});
+  }, 4000);
+}
+
+let clave = "";

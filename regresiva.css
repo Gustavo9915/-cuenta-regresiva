@@ -55,3 +55,21 @@ body {
   bottom: 30px;
   opacity: 1;
 }
+#mensajeSecreto {
+  position: fixed;
+  bottom: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #111;
+  color: #00ffe0;
+  padding: 15px 25px;
+  border-radius: 15px;
+  opacity: 0;
+  transition: 0.5s;
+  box-shadow: 0 0 15px #00ffe0;
+}
+
+#mensajeSecreto.mostrar {
+  bottom: 30px;
+  opacity: 1;
+}
