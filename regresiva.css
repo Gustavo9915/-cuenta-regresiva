@@ -2,7 +2,7 @@ body {
   text-align: center;
   background: #1e1e2f;
   color: white;
-  font-family: Arial;
+  font-family: "Edu NSW ACT Cursive", cursive;
 }
 
 /* contador */
@@ -72,4 +72,24 @@ body {
 #mensajeSecreto.mostrar {
   bottom: 30px;
   opacity: 1;
+}
+.frase,
+.misterio {
+  color: white;
+  margin-top: 15px;
+  font-size: 18px;
+  opacity: 0.85;
+  text-align: center;
+}
+#randomMsg{
+  margin-top:15px;
+  color:#00ffcc;
+  font-style:italic;
+  opacity:0.8;
+}
+.contenedor{
+  border:2px solid #00ffcc;
+  box-shadow:
+  0 0 10px #00ffcc,
+  0 0 20px #00ffcc;
 }
