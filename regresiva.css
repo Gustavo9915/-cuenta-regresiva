@@ -3,25 +3,60 @@ body {
   background: #1e1e2f;
   color: white;
   font-family: "Edu NSW ACT Cursive", cursive;
+  transition: 2s;
+  overflow-x: hidden;
 }
 
-/* contador */
+/* 📦 CONTENEDOR */
+.contenedor {
+  margin: 40px auto;
+  padding: 30px;
+  width: 85%;
+  max-width: 700px;
+  border: 2px solid #00ffcc;
+  border-radius: 20px;
+
+  box-shadow:
+    0 0 10px #00ffcc,
+    0 0 20px #00ffcc;
+
+  background: rgba(0,0,0,0.25);
+
+  backdrop-filter: blur(5px);
+}
+
+/* ⏳ CONTADOR */
 #contador {
-  font-size: 2em;
+  font-size: 2.5em;
   margin: 20px;
+  transition: 0.3s;
+
+  text-shadow:
+    0 0 10px #00ffcc,
+    0 0 20px #00ffcc;
 }
 
-/* botón */
+/* 🔘 BOTÓN */
 .boton_menu {
-  padding: 10px 20px;
+  padding: 12px 25px;
   font-size: 16px;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   background: #0984e3;
   color: white;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-/* 🔒 BLOQUEADO REAL */
+.boton_menu:hover {
+  transform: scale(1.05);
+
+  box-shadow:
+    0 0 10px #0984e3,
+    0 0 20px #0984e3;
+}
+
+/* 🔒 BLOQUEADO */
 .bloqueado {
   pointer-events: none;
   opacity: 0.5;
@@ -36,43 +71,40 @@ body {
 .activo button {
   background: #00b894;
   cursor: pointer;
+
+  box-shadow:
+    0 0 10px #00b894,
+    0 0 20px #00b894;
 }
+
+/* 👀 MENSAJE SECRETO */
 #mensajeSecreto {
   position: fixed;
   bottom: -100px;
   left: 50%;
   transform: translateX(-50%);
+
   background: #111;
   color: #00ffe0;
+
   padding: 15px 25px;
+
   border-radius: 15px;
+
   opacity: 0;
+
   transition: 0.5s;
-  box-shadow: 0 0 15px #00ffe0;
+
+  box-shadow:
+    0 0 15px #00ffe0;
 }
 
 #mensajeSecreto.mostrar {
   bottom: 30px;
   opacity: 1;
 }
-#mensajeSecreto {
-  position: fixed;
-  bottom: -100px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #111;
-  color: #00ffe0;
-  padding: 15px 25px;
-  border-radius: 15px;
-  opacity: 0;
-  transition: 0.5s;
-  box-shadow: 0 0 15px #00ffe0;
-}
 
-#mensajeSecreto.mostrar {
-  bottom: 30px;
-  opacity: 1;
-}
+/* ✨ FRASES */
 .frase,
 .misterio {
   color: white;
@@ -81,15 +113,44 @@ body {
   opacity: 0.85;
   text-align: center;
 }
-#randomMsg{
-  margin-top:15px;
-  color:#00ffcc;
-  font-style:italic;
-  opacity:0.8;
+
+.misterio {
+  color: #00ffcc;
+  font-style: italic;
 }
-.contenedor{
-  border:2px solid #00ffcc;
-  box-shadow:
-  0 0 10px #00ffcc,
-  0 0 20px #00ffcc;
+
+/* 👀 MENSAJE RANDOM */
+#randomMsg {
+  margin-top: 15px;
+  color: #00ffcc;
+  font-style: italic;
+  opacity: 0.8;
+  min-height: 25px;
+}
+
+/* 🌟 TÍTULO */
+h1 {
+  font-size: 3em;
+
+  text-shadow:
+    0 0 10px #00ffcc,
+    0 0 20px #00ffcc;
+}
+
+/* 📱 RESPONSIVE */
+@media (max-width: 600px) {
+
+  #contador {
+    font-size: 1.8em;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  .contenedor {
+    width: 92%;
+    padding: 20px;
+  }
+
 }
