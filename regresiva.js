@@ -2,6 +2,9 @@ let intervalo;
 let mensajeActivo = false;
 let clave = "";
 
+// 💓 LATIDO
+let latido;
+
 // 👀 MENSAJES SECRETOS
 let mensajes = [
   "👀 Prepárate… algo especial está por venir 💐",
@@ -62,16 +65,20 @@ window.onload = () => {
 
   }, 2000);
 
-  // 💓 LATIDO
-  setInterval(() => {
+  // 💓 LATIDO NORMAL
+  latido = setInterval(() => {
 
     let contador =
       document.getElementById("contador");
 
-    contador.style.transform = "scale(1.18)";
+    contador.style.transform =
+      "scale(1.18)";
 
     setTimeout(() => {
-      contador.style.transform = "scale(1)";
+
+      contador.style.transform =
+        "scale(1)";
+
     }, 500);
 
   }, 1200);
@@ -88,7 +95,8 @@ window.onload = () => {
 
   setInterval(() => {
 
-    let frase = document.querySelector(".frase");
+    let frase =
+      document.querySelector(".frase");
 
     if (frase) {
 
@@ -154,7 +162,9 @@ window.onload = () => {
 function iniciarCuenta() {
 
   // 📅 FECHA DEL EVENTO
-  let objetivo = new Date("2026-05-09T11:00:00");
+  //let objetivo = new Date("2026-05-09T11:00:00");
+
+  let objetivo = new Date("2026-05-08T21:30:00")
 
   let contador =
     document.getElementById("contador");
@@ -188,6 +198,67 @@ function iniciarCuenta() {
       Math.floor((diferencia % 3600) / 60);
 
     let s = diferencia % 60;
+
+    // 🚨 44 MINUTOS
+    if (d == 0 && h == 0 && m == 44 && s == 0) {
+
+      // 👀 MENSAJE
+      let aviso =
+        document.createElement("div");
+
+      aviso.innerHTML =
+        "👀 Quedan solo 44 minutos para revelar el secreto...";
+
+      aviso.style.position = "fixed";
+
+      aviso.style.top = "20px";
+      aviso.style.left = "50%";
+
+      aviso.style.transform =
+        "translateX(-50%)";
+
+      aviso.style.background = "#111";
+
+      aviso.style.color = "#00ffcc";
+
+      aviso.style.padding = "15px 25px";
+
+      aviso.style.borderRadius = "15px";
+
+      aviso.style.boxShadow =
+        "0 0 20px #00ffcc";
+
+      aviso.style.zIndex = "99999";
+
+      document.body.appendChild(aviso);
+
+      setTimeout(() => {
+
+        aviso.remove();
+
+      }, 5000);
+
+      // 💓 LATIDO RÁPIDO
+      clearInterval(latido);
+
+      latido = setInterval(() => {
+
+        let contador =
+          document.getElementById("contador");
+
+        contador.style.transform =
+          "scale(1.25)";
+
+        setTimeout(() => {
+
+          contador.style.transform =
+            "scale(1)";
+
+        }, 250);
+
+      }, 500);
+
+    }
 
     contador.textContent =
       `${String(d).padStart(2, "0")}d ` +
@@ -411,3 +482,151 @@ function confeti() {
   }
 
 }
+// 🎨 DIBUJO 1
+let dibujo1 = document.createElement("img");
+
+dibujo1.src = "img/amiga.jpg";
+
+dibujo1.style.width = "220px";
+
+dibujo1.style.position = "fixed";
+
+dibujo1.style.left = "10%";
+
+dibujo1.style.bottom = "40px";
+
+dibujo1.style.borderRadius = "20px";
+
+dibujo1.style.boxShadow =
+"0 0 20px #00ffcc";
+
+document.body.appendChild(dibujo1);
+
+
+// 🎨 DIBUJO 2
+let dibujo2 = document.createElement("img");
+
+dibujo2.src = "img/amiga2.jpg";
+
+dibujo2.style.width = "220px";
+
+dibujo2.style.position = "fixed";
+
+dibujo2.style.right = "10%";
+
+dibujo2.style.bottom = "40px";
+
+dibujo2.style.borderRadius = "20px";
+
+dibujo2.style.boxShadow =
+"0 0 20px #ff66cc";
+
+document.body.appendChild(dibujo2);
+
+// 🖼️ EFECTO FLOTAR EN LAS IMÁGENES
+setInterval(() => {
+
+  let imgs =
+    document.querySelectorAll("img");
+
+  imgs.forEach(img => {
+
+    img.style.transition = "1s";
+
+    img.style.transform =
+      "translateY(-10px)";
+
+    setTimeout(() => {
+
+      img.style.transform =
+        "translateY(0px)";
+
+    },1000);
+
+  });
+
+},2000);
+
+
+// ✨ BRILLO AUTOMÁTICO EN LAS IMÁGENES
+setInterval(() => {
+
+  let imgs =
+    document.querySelectorAll("img");
+
+  imgs.forEach(img => {
+
+    img.style.transition = "0.8s";
+
+    img.style.boxShadow =
+      "0 0 30px #00ffcc";
+
+    setTimeout(() => {
+
+      img.style.boxShadow =
+        "0 0 15px #00ffcc";
+
+    },800);
+
+  });
+
+},1800);
+
+// 💬 TEXTO AL PASAR EL MOUSE EN LAS IMÁGENES
+
+let imgs =
+  document.querySelectorAll("img");
+
+imgs.forEach(img => {
+
+  // 👀 CREAR TEXTO
+  let texto =
+    document.createElement("div");
+
+  texto.innerHTML =
+    "💐 Para mi hermana Rocy, gracias por siempre apoyarme 💖";
+
+  texto.style.position = "fixed";
+
+  texto.style.background = "#111";
+
+  texto.style.color = "#00ffcc";
+
+  texto.style.padding = "10px 20px";
+
+  texto.style.borderRadius = "15px";
+
+  texto.style.boxShadow =
+    "0 0 20px #00ffcc";
+
+  texto.style.opacity = "0";
+
+  texto.style.transition = "0.3s";
+
+  texto.style.pointerEvents = "none";
+
+  texto.style.zIndex = "99999";
+
+  document.body.appendChild(texto);
+
+  // 🖱️ AL PASAR EL MOUSE
+  img.addEventListener("mousemove", (e) => {
+
+    texto.style.left =
+      e.clientX + 20 + "px";
+
+    texto.style.top =
+      e.clientY - 20 + "px";
+
+    texto.style.opacity = "1";
+
+  });
+
+  // ❌ AL SALIR
+  img.addEventListener("mouseleave", () => {
+
+    texto.style.opacity = "0";
+
+  });
+
+});
