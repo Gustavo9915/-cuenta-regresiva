@@ -2,10 +2,8 @@ let intervalo;
 let mensajeActivo = false;
 let clave = "";
 
-// 💓 LATIDO
 let latido;
 
-// 👀 MENSAJES SECRETOS
 let mensajes = [
   "👀 Prepárate… algo especial está por venir 💐",
   "👀 Solo los curiosos encuentran esto 😎",
@@ -15,142 +13,96 @@ let mensajes = [
 
 let indice = 0;
 
+// 🥚 CLAVES EASTER EGGS
+let claveRocy = "";
+let claveUlises = "";
+let claveEvento = "";
+
 window.onload = () => {
+
+  agregarAnimacion();
+  crearMarco();
+  crearCorazones();
 
   iniciarCuenta();
 
-  // 👆 DOBLE CLICK
+  // 👀 MENSAJES
   document.getElementById("contador").addEventListener("dblclick", () => {
     mostrarMensaje();
   });
 
-  // 🔐 CLAVES SECRETAS
+  // 🔐 TECLAS
   document.addEventListener("keydown", (e) => {
 
-    clave += e.key.toLowerCase();
+    let k = e.key.toLowerCase();
 
-    // 🔥 desbloquear manual
-    if (clave.includes("evento")) {
-      activarEvento();
-      clave = "";
-    }
+    clave += k;
+    claveRocy += k;
+    claveUlises += k;
+    claveEvento += k;
 
-    // 👀 mostrar secretos
+    // 🔥 desbloqueo secreto general
     if (clave.includes("gus")) {
       mostrarMensaje();
       clave = "";
     }
 
-    if (clave.length > 15) {
-      clave = "";
+    // 💖 ROCY
+    if (claveRocy.includes("rocy")) {
+      mostrarRocy();
+      claveRocy = "";
     }
 
+    // 🔥 ULISES
+    if (claveUlises.includes("ulises")) {
+      mostrarUlises();
+      claveUlises = "";
+    }
+
+    // 🔐 EVENTO (SOLO BLOQUEADO)
+    if (claveEvento.includes("evento")) {
+      mostrarEventoBloqueado();
+      claveEvento = "";
+    }
+
+    if (clave.length > 20) clave = "";
   });
 
-  // 🌈 COLORES DEL CONTADOR
-  let colores = [
-    "#ffffff",
-    "#00ffcc",
-    "#ff66cc",
-    "#ffd166",
-    "#74b9ff"
-  ];
+  // 🌈 COLORES
+  let colores = ["#fff", "#00ffcc", "#ff66cc", "#ffd166", "#74b9ff"];
 
   setInterval(() => {
 
-    let random =
+    document.getElementById("contador").style.color =
       colores[Math.floor(Math.random() * colores.length)];
-
-    document.getElementById("contador").style.color = random;
 
   }, 2000);
 
   // 💓 LATIDO NORMAL
   latido = setInterval(() => {
 
-    let contador =
-      document.getElementById("contador");
+    let c = document.getElementById("contador");
 
-    contador.style.transform =
-      "scale(1.18)";
+    c.style.transform = "scale(1.12)";
 
     setTimeout(() => {
-
-      contador.style.transform =
-        "scale(1)";
-
-    }, 500);
+      c.style.transform = "scale(1)";
+    }, 400);
 
   }, 1200);
 
-  // ✨ FRASES
-  let frases = [
-    "🎨 Un evento especial lleno de sorpresas y nuevos dibujos",
-    "👀 Algunos secretos aparecerán antes del evento…",
-    "💐 Gracias por apoyar mis dibujos",
-    "🔥 Cada segundo nos acerca más al estreno"
-  ];
-
-  let i = 0;
-
-  setInterval(() => {
-
-    let frase =
-      document.querySelector(".frase");
-
-    if (frase) {
-
-      frase.textContent = frases[i];
-
-      i++;
-
-      if (i >= frases.length) {
-        i = 0;
-      }
-
-    }
-
-  }, 4000);
-
-  // 👀 MENSAJES RANDOM
-  let msg = document.getElementById("randomMsg");
-
-  if (msg) {
-
-    let secretos = [
-      "👀 Algo se acerca...",
-      "🔥 Ya casi llega el momento...",
-      "🎨 Nuevas sorpresas pronto...",
-      "💐 Gracias por apoyar mis dibujos",
-      "⏳ La cuenta regresiva continúa..."
-    ];
-
-    setInterval(() => {
-
-      let random =
-        secretos[Math.floor(Math.random() * secretos.length)];
-
-      msg.textContent = random;
-
-    }, 5000);
-
-  }
-
-  // 🌈 FONDO CAMBIANTE
+  // 🌈 FONDOS
   let fondos = [
-    "linear-gradient(45deg, #1e1e2f, #2d3436)",
-    "linear-gradient(45deg, #2d1b4d, #111827)",
-    "linear-gradient(45deg, #3b1f2b, #1e272e)",
-    "linear-gradient(45deg, #0f2027, #203a43)",
-    "linear-gradient(45deg, #232526, #414345)"
+    "linear-gradient(45deg,#1e1e2f,#2d3436)",
+    "linear-gradient(45deg,#2d1b4d,#111827)",
+    "linear-gradient(45deg,#3b1f2b,#1e272e)",
+    "linear-gradient(45deg,#0f2027,#203a43)"
   ];
 
   setInterval(() => {
 
-    let random =
+    document.body.style.background =
       fondos[Math.floor(Math.random() * fondos.length)];
-
-    document.body.style.background = random;
 
   }, 7000);
 
@@ -161,472 +113,283 @@ window.onload = () => {
 //
 function iniciarCuenta() {
 
-  // 📅 FECHA DEL EVENTO
-  //let objetivo = new Date("2026-05-09T11:00:00");
-
-  let objetivo = new Date("2026-05-08T21:30:00")
-
-  let contador =
-    document.getElementById("contador");
+  let objetivo = new Date("2026-05-09T11:00:00");
+  let contador = document.getElementById("contador");
 
   intervalo = setInterval(() => {
 
     if (mensajeActivo) return;
 
     let ahora = new Date();
+    let diferencia = Math.floor((objetivo - ahora) / 1000);
 
-    let diferencia =
-      Math.floor((objetivo - ahora) / 1000);
-
-    // 🎉 EVENTO
+    // 💥 FINAL REAL
     if (diferencia <= 0) {
 
       clearInterval(intervalo);
 
-      activarEvento();
+      contador.style.transition = "0.6s";
+      contador.style.transform = "scale(2)";
+      contador.style.opacity = "0";
+
+      document.body.style.background =
+        "linear-gradient(45deg,#ff4d88,#00b894,#0984e3)";
+
+      for (let i = 0; i < 80; i++) {
+
+        let p = document.createElement("div");
+        p.innerHTML = "🎉";
+        p.style.position = "fixed";
+        p.style.left = Math.random() * 100 + "%";
+        p.style.top = Math.random() * 100 + "%";
+        p.style.fontSize = "20px";
+
+        document.body.appendChild(p);
+
+        setTimeout(() => p.remove(), 2000);
+      }
+
+      setTimeout(() => {
+        activarEvento();
+      }, 1200);
 
       return;
     }
 
-    let d =
-      Math.floor(diferencia / 86400);
-
-    let h =
-      Math.floor((diferencia % 86400) / 3600);
-
-    let m =
-      Math.floor((diferencia % 3600) / 60);
-
+    let d = Math.floor(diferencia / 86400);
+    let h = Math.floor((diferencia % 86400) / 3600);
+    let m = Math.floor((diferencia % 3600) / 60);
     let s = diferencia % 60;
 
-    // 🚨 44 MINUTOS
-    if (d == 0 && h == 0 && m == 44 && s == 0) {
+    // 💓 LATIDO FUERTE (18H)
+    if (d === 0 && h <= 18) {
 
-      // 👀 MENSAJE
-      let aviso =
-        document.createElement("div");
-
-      aviso.innerHTML =
-        "👀 Quedan solo 44 minutos para revelar el secreto...";
-
-      aviso.style.position = "fixed";
-
-      aviso.style.top = "20px";
-      aviso.style.left = "50%";
-
-      aviso.style.transform =
-        "translateX(-50%)";
-
-      aviso.style.background = "#111";
-
-      aviso.style.color = "#00ffcc";
-
-      aviso.style.padding = "15px 25px";
-
-      aviso.style.borderRadius = "15px";
-
-      aviso.style.boxShadow =
-        "0 0 20px #00ffcc";
-
-      aviso.style.zIndex = "99999";
-
-      document.body.appendChild(aviso);
-
-      setTimeout(() => {
-
-        aviso.remove();
-
-      }, 5000);
-
-      // 💓 LATIDO RÁPIDO
       clearInterval(latido);
 
       latido = setInterval(() => {
 
-        let contador =
-          document.getElementById("contador");
-
-        contador.style.transform =
-          "scale(1.25)";
+        contador.style.transform = "scale(1.25)";
+        contador.style.textShadow = "0 0 20px #ff4d88";
 
         setTimeout(() => {
+          contador.style.transform = "scale(1)";
+          contador.style.textShadow = "none";
+        }, 200);
 
-          contador.style.transform =
-            "scale(1)";
-
-        }, 250);
-
-      }, 500);
-
+      }, 400);
     }
 
-    contador.textContent =
-      `${String(d).padStart(2, "0")}d ` +
-      `${String(h).padStart(2, "0")}h ` +
-      `${String(m).padStart(2, "0")}m ` +
-      `${String(s).padStart(2, "0")}s`;
+    contador.innerHTML =
+      `💖 ${d}d ⏰ ${h}h 🌸 ${m}m ✨ ${s}s`;
 
   }, 1000);
 
 }
 
 //
-// 👀 MENSAJES SECRETOS
+// 👀 MENSAJE NORMAL
 //
 function mostrarMensaje() {
 
-  let msg =
-    document.getElementById("mensajeSecreto");
-
+  let msg = document.getElementById("mensajeSecreto");
   if (!msg) return;
 
   msg.textContent = mensajes[indice];
-
-  indice++;
-
-  if (indice >= mensajes.length) {
-    indice = 0;
-  }
+  indice = (indice + 1) % mensajes.length;
 
   msg.classList.add("mostrar");
 
-  setTimeout(() => {
-
-    msg.classList.remove("mostrar");
-
-  }, 4000);
-
+  setTimeout(() => msg.classList.remove("mostrar"), 4000);
 }
 
 //
-// 🎉 ACTIVAR EVENTO
+// 💖 ROCY
+//
+function mostrarUlises() {
+
+  let box = document.createElement("div");
+
+  box.style.position = "fixed";
+  box.style.top = "50%";
+  box.style.left = "50%";
+  box.style.transform = "translate(-50%, -50%)";
+  box.style.background = "rgba(0,0,0,0.92)";
+  box.style.padding = "20px";
+  box.style.borderRadius = "20px";
+  box.style.boxShadow = "0 0 25px #00ffcc";
+  box.style.zIndex = "99999";
+  box.style.textAlign = "center";
+  box.style.maxWidth = "320px";
+  box.style.color = "#00ffcc";
+
+  box.innerHTML = `
+    🔥 ULISES 🔥<br><br>
+    Gracias carnal 👊<br>
+    Parte de este proyecto 💥<br><br>
+  `;
+
+  let img = document.createElement("img");
+  img.src = "img/ulices.jpg"; // 👈 tu foto
+  img.style.width = "100%";
+  img.style.borderRadius = "15px";
+  img.style.boxShadow = "0 0 15px #00ffcc";
+
+  box.appendChild(img);
+
+  document.body.appendChild(box);
+
+  setTimeout(() => box.remove(), 6000);
+}
+function mostrarRocy() {
+
+  let box = document.createElement("div");
+
+  box.style.position = "fixed";
+  box.style.top = "50%";
+  box.style.left = "50%";
+  box.style.transform = "translate(-50%, -50%)";
+  box.style.background = "rgba(0,0,0,0.92)";
+  box.style.padding = "20px";
+  box.style.borderRadius = "20px";
+  box.style.boxShadow = "0 0 25px #ff4d88";
+  box.style.zIndex = "99999";
+  box.style.textAlign = "center";
+  box.style.maxWidth = "320px";
+  box.style.color = "#ff4d88";
+
+  box.innerHTML = `
+    💖 ROCY 💖<br><br>
+    Eres como una segunda mamá 🌸<br>
+    Gracias por todo 💐<br><br>
+  `;
+
+  let img = document.createElement("img");
+  img.src = "img/fami.jpg"; // 👈 tu foto
+  img.style.width = "100%";
+  img.style.borderRadius = "15px";
+  img.style.boxShadow = "0 0 15px #ff4d88";
+
+  box.appendChild(img);
+
+  document.body.appendChild(box);
+
+  setTimeout(() => box.remove(), 6000);
+}
+//
+// 🔐 EVENTO BLOQUEADO
+//
+function mostrarEventoBloqueado() {
+
+  let aviso = document.createElement("div");
+
+  aviso.innerHTML =
+    "🔐 EVENTO 🔐<br><br>" +
+    "⏳ Aún no disponible<br>" +
+    "💖 Espera a que la cuenta llegue a 0";
+
+  aviso.style.position = "fixed";
+  aviso.style.top = "50%";
+  aviso.style.left = "50%";
+  aviso.style.transform = "translate(-50%, -50%)";
+  aviso.style.background = "rgba(0,0,0,0.95)";
+  aviso.style.color = "#ffcc00";
+  aviso.style.padding = "25px";
+  aviso.style.borderRadius = "20px";
+  aviso.style.zIndex = "99999";
+  aviso.style.textAlign = "center";
+
+  document.body.appendChild(aviso);
+
+  setTimeout(() => aviso.remove(), 3000);
+}
+
+//
+// 🎉 EVENTO REAL
 //
 function activarEvento() {
 
-  let link =
-    document.getElementById("linkEvento");
+  let aviso = document.createElement("div");
 
-  let contador =
-    document.getElementById("contador");
-
-  // 👀 PANTALLA PREVIA
-  let aviso =
-    document.createElement("div");
-
-  aviso.innerHTML =
-    "👀 El secreto finalmente ha sido revelado...";
+  aviso.innerHTML = "🎉 EVENTO DISPONIBLE 🎉";
 
   aviso.style.position = "fixed";
-
   aviso.style.top = "0";
   aviso.style.left = "0";
-
   aviso.style.width = "100%";
   aviso.style.height = "100%";
-
   aviso.style.background = "black";
-
   aviso.style.display = "flex";
-
   aviso.style.justifyContent = "center";
-
   aviso.style.alignItems = "center";
-
   aviso.style.fontSize = "2em";
-
   aviso.style.color = "#00ffcc";
-
   aviso.style.zIndex = "99999";
 
   document.body.appendChild(aviso);
 
-  // ✨ FLASH
-  document.body.style.filter =
-    "brightness(2)";
-
-  setTimeout(() => {
-
-    document.body.style.filter =
-      "brightness(1)";
-
-  }, 300);
-
-  // 🌈 NUEVO FONDO
-  document.body.style.background =
-    "linear-gradient(45deg,#00b894,#0984e3)";
-
-  // 🎆 CONFETI
-  confeti();
-
-  // ⏳ ESPERAR
-  setTimeout(() => {
-
-    aviso.remove();
-
-    // 👀 TEXTO GIGANTE
-    let mega =
-      document.createElement("div");
-
-    mega.innerHTML =
-      "🎉 EVENTO DISPONIBLE 🎉";
-
-    mega.style.position = "fixed";
-
-    mega.style.top = "35%";
-
-    mega.style.left = "50%";
-
-    mega.style.transform =
-      "translate(-50%, -50%)";
-
-    mega.style.fontSize = "2.2em";
-
-    mega.style.fontWeight = "bold";
-
-    mega.style.color = "#ffffff";
-
-    mega.style.textShadow =
-      "0 0 20px #00ffcc";
-
-    mega.style.textAlign = "center";
-
-    mega.style.width = "100%";
-
-    mega.style.zIndex = "9999";
-
-    document.body.appendChild(mega);
-
-    // ✨ PARTÍCULAS
-    for (let i = 0; i < 80; i++) {
-
-      let p =
-        document.createElement("div");
-
-      p.innerHTML = "✨";
-
-      p.style.position = "fixed";
-
-      p.style.left =
-        Math.random() * 100 + "%";
-
-      p.style.top =
-        Math.random() * 100 + "%";
-
-      p.style.fontSize = "20px";
-
-      document.body.appendChild(p);
-
-    }
-
-    // 💐 MENSAJE FINAL
-    let extra =
-      document.createElement("p");
-
-    extra.innerHTML =
-      "💐 Gracias por esperar este momento";
-
-    extra.style.marginTop = "40px";
-
-    extra.style.fontSize = "20px";
-
-    extra.style.color = "#ffffff";
-
-    extra.style.textAlign = "center";
-
-    document.body.appendChild(extra);
-
-    // 🔓 DESBLOQUEAR
-    link.classList.remove("bloqueado");
-
-    link.classList.add("activo");
-
-    contador.textContent =
-      "🎉 EVENTO DESBLOQUEADO 🎉";
-
-  }, 4000);
-
+  setTimeout(() => aviso.remove(), 4000);
 }
 
 //
-// 🎆 CONFETI
+// 💖 MARCO
 //
-function confeti() {
+function crearMarco() {
 
-  for (let i = 0; i < 40; i++) {
+  let m = document.createElement("div");
+  m.style.position = "fixed";
+  m.style.top = "12px";
+  m.style.left = "12px";
+  m.style.right = "12px";
+  m.style.bottom = "12px";
+  m.style.border = "6px solid #ffd6e7";
+  m.style.borderRadius = "25px";
+  m.style.pointerEvents = "none";
+  m.style.zIndex = "9999";
 
-    let c =
-      document.createElement("div");
+  document.body.appendChild(m);
+}
 
-    c.innerHTML = "🎉";
+//
+// ❤️ CORAZONES
+//
+function crearCorazones() {
 
+  let pos = [
+    { top: "10px", left: "10px" },
+    { top: "10px", right: "10px" },
+    { bottom: "10px", left: "10px" },
+    { bottom: "10px", right: "10px" }
+  ];
+
+  pos.forEach(p => {
+
+    let c = document.createElement("div");
+    c.innerHTML = "💖";
     c.style.position = "fixed";
+    c.style.fontSize = "18px";
+    c.style.opacity = "0.6";
+    c.style.zIndex = "9999";
 
-    c.style.left =
-      Math.random() * 100 + "%";
-
-    c.style.top =
-      Math.random() * 100 + "%";
-
-    c.style.fontSize = "25px";
-
-    c.style.pointerEvents = "none";
+    Object.assign(c.style, p);
 
     document.body.appendChild(c);
-
-    setTimeout(() => {
-
-      c.remove();
-
-    }, 3000);
-
-  }
+  });
 
 }
-// 🎨 DIBUJO 1
-let dibujo1 = document.createElement("img");
 
-dibujo1.src = "img/amiga.jpg";
-
-dibujo1.style.width = "220px";
-
-dibujo1.style.position = "fixed";
-
-dibujo1.style.left = "10%";
-
-dibujo1.style.bottom = "40px";
-
-dibujo1.style.borderRadius = "20px";
-
-dibujo1.style.boxShadow =
-"0 0 20px #00ffcc";
-
-document.body.appendChild(dibujo1);
-
-
-// 🎨 DIBUJO 2
-let dibujo2 = document.createElement("img");
-
-dibujo2.src = "img/amiga2.jpg";
-
-dibujo2.style.width = "220px";
-
-dibujo2.style.position = "fixed";
-
-dibujo2.style.right = "10%";
-
-dibujo2.style.bottom = "40px";
-
-dibujo2.style.borderRadius = "20px";
-
-dibujo2.style.boxShadow =
-"0 0 20px #ff66cc";
-
-document.body.appendChild(dibujo2);
-
-// 🖼️ EFECTO FLOTAR EN LAS IMÁGENES
-setInterval(() => {
-
-  let imgs =
-    document.querySelectorAll("img");
-
-  imgs.forEach(img => {
-
-    img.style.transition = "1s";
-
-    img.style.transform =
-      "translateY(-10px)";
-
-    setTimeout(() => {
-
-      img.style.transform =
-        "translateY(0px)";
-
-    },1000);
-
-  });
-
-},2000);
-
-
-// ✨ BRILLO AUTOMÁTICO EN LAS IMÁGENES
-setInterval(() => {
-
-  let imgs =
-    document.querySelectorAll("img");
-
-  imgs.forEach(img => {
-
-    img.style.transition = "0.8s";
-
-    img.style.boxShadow =
-      "0 0 30px #00ffcc";
-
-    setTimeout(() => {
-
-      img.style.boxShadow =
-        "0 0 15px #00ffcc";
-
-    },800);
-
-  });
-
-},1800);
-
-// 💬 TEXTO AL PASAR EL MOUSE EN LAS IMÁGENES
-
-let imgs =
-  document.querySelectorAll("img");
-
-imgs.forEach(img => {
-
-  // 👀 CREAR TEXTO
-  let texto =
-    document.createElement("div");
-
-  texto.innerHTML =
-    "💐 Para mi hermana Rocy, gracias por siempre apoyarme 💖";
-
-  texto.style.position = "fixed";
-
-  texto.style.background = "#111";
-
-  texto.style.color = "#00ffcc";
-
-  texto.style.padding = "10px 20px";
-
-  texto.style.borderRadius = "15px";
-
-  texto.style.boxShadow =
-    "0 0 20px #00ffcc";
-
-  texto.style.opacity = "0";
-
-  texto.style.transition = "0.3s";
-
-  texto.style.pointerEvents = "none";
-
-  texto.style.zIndex = "99999";
-
-  document.body.appendChild(texto);
-
-  // 🖱️ AL PASAR EL MOUSE
-  img.addEventListener("mousemove", (e) => {
-
-    texto.style.left =
-      e.clientX + 20 + "px";
-
-    texto.style.top =
-      e.clientY - 20 + "px";
-
-    texto.style.opacity = "1";
-
-  });
-
-  // ❌ AL SALIR
-  img.addEventListener("mouseleave", () => {
-
-    texto.style.opacity = "0";
-
-  });
-
-});
+//
+// ✨ ANIMACIÓN
+//
+function agregarAnimacion() {
+
+  let s = document.createElement("style");
+
+  s.innerHTML = `
+  @keyframes flotar {
+    0%{transform:translateY(0)}
+    50%{transform:translateY(-8px)}
+    100%{transform:translateY(0)}
+  }`;
+
+  document.head.appendChild(s);
+}
