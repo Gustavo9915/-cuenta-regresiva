@@ -1,37 +1,36 @@
 let intervalo;
-let mensajeActivo = false;
-let clave = "";
-
 let latido;
+
+let clave = "";
+let claveRocy = "";
+let claveUlises = "";
+let claveEvento = "";
+let claveCasi = "";
 
 let mensajes = [
   "👀 Prepárate… algo especial está por venir 💐",
-  "👀 Solo los curiosos encuentran esto 😎",
-  "👀 Esto es solo el inicio… 🎨",
-  "👀 Si ves esto, eres de los pocos 🔥"
+  "🎨 Nuevos dibujos en camino",
+  "🔥 Ya casi llega el momento",
+  "💖 Gracias por apoyar"
 ];
 
 let indice = 0;
 
-// 🥚 CLAVES EASTER EGGS
-let claveRocy = "";
-let claveUlises = "";
-let claveEvento = "";
-
 window.onload = () => {
-
-  agregarAnimacion();
-  crearMarco();
-  crearCorazones();
 
   iniciarCuenta();
 
-  // 👀 MENSAJES
-  document.getElementById("contador").addEventListener("dblclick", () => {
+  crearMarco();
+
+  // 💖 DOBLE CLICK
+  document.getElementById("contador")
+  .addEventListener("dblclick", () => {
+
     mostrarMensaje();
+
   });
 
-  // 🔐 TECLAS
+  // 🔐 CLAVES
   document.addEventListener("keydown", (e) => {
 
     let k = e.key.toLowerCase();
@@ -40,71 +39,45 @@ window.onload = () => {
     claveRocy += k;
     claveUlises += k;
     claveEvento += k;
-
-    // 🔥 desbloqueo secreto general
-    if (clave.includes("gus")) {
-      mostrarMensaje();
-      clave = "";
-    }
+    claveCasi += k;
 
     // 💖 ROCY
     if (claveRocy.includes("rocy")) {
+
       mostrarRocy();
       claveRocy = "";
+
     }
 
     // 🔥 ULISES
     if (claveUlises.includes("ulises")) {
+
       mostrarUlises();
       claveUlises = "";
+
     }
 
-    // 🔐 EVENTO (SOLO BLOQUEADO)
+    // ⏳ CASI
+    if (claveCasi.includes("casi")) {
+
+      mostrarCasi();
+      claveCasi = "";
+
+    }
+
+    // 🔐 EVENTO
     if (claveEvento.includes("evento")) {
+
       mostrarEventoBloqueado();
       claveEvento = "";
+
     }
 
-    if (clave.length > 20) clave = "";
+    if (clave.length > 20) {
+      clave = "";
+    }
+
   });
-
-  // 🌈 COLORES
-  let colores = ["#fff", "#00ffcc", "#ff66cc", "#ffd166", "#74b9ff"];
-
-  setInterval(() => {
-
-    document.getElementById("contador").style.color =
-      colores[Math.floor(Math.random() * colores.length)];
-
-  }, 2000);
-
-  // 💓 LATIDO NORMAL
-  latido = setInterval(() => {
-
-    let c = document.getElementById("contador");
-
-    c.style.transform = "scale(1.12)";
-
-    setTimeout(() => {
-      c.style.transform = "scale(1)";
-    }, 400);
-
-  }, 1200);
-
-  // 🌈 FONDOS
-  let fondos = [
-    "linear-gradient(45deg,#1e1e2f,#2d3436)",
-    "linear-gradient(45deg,#2d1b4d,#111827)",
-    "linear-gradient(45deg,#3b1f2b,#1e272e)",
-    "linear-gradient(45deg,#0f2027,#203a43)"
-  ];
-
-  setInterval(() => {
-
-    document.body.style.background =
-      fondos[Math.floor(Math.random() * fondos.length)];
-
-  }, 7000);
 
 };
 
@@ -113,221 +86,375 @@ window.onload = () => {
 //
 function iniciarCuenta() {
 
-  let objetivo = new Date("2026-05-09T11:00:00");
-  let contador = document.getElementById("contador");
+  let objetivo =
+    new Date("2026-05-09T11:00:00");
+
+  let contador =
+    document.getElementById("contador");
 
   intervalo = setInterval(() => {
 
-    if (mensajeActivo) return;
-
     let ahora = new Date();
-    let diferencia = Math.floor((objetivo - ahora) / 1000);
 
-    // 💥 FINAL REAL
+    let diferencia =
+      Math.floor((objetivo - ahora) / 1000);
+
+    // 🎉 EVENTO
     if (diferencia <= 0) {
 
       clearInterval(intervalo);
 
-      contador.style.transition = "0.6s";
-      contador.style.transform = "scale(2)";
-      contador.style.opacity = "0";
-
-      document.body.style.background =
-        "linear-gradient(45deg,#ff4d88,#00b894,#0984e3)";
-
-      for (let i = 0; i < 80; i++) {
-
-        let p = document.createElement("div");
-        p.innerHTML = "🎉";
-        p.style.position = "fixed";
-        p.style.left = Math.random() * 100 + "%";
-        p.style.top = Math.random() * 100 + "%";
-        p.style.fontSize = "20px";
-
-        document.body.appendChild(p);
-
-        setTimeout(() => p.remove(), 2000);
-      }
-
-      setTimeout(() => {
-        activarEvento();
-      }, 1200);
+      activarEvento();
 
       return;
     }
 
-    let d = Math.floor(diferencia / 86400);
-    let h = Math.floor((diferencia % 86400) / 3600);
-    let m = Math.floor((diferencia % 3600) / 60);
-    let s = diferencia % 60;
+    let d =
+      Math.floor(diferencia / 86400);
 
-    // 💓 LATIDO FUERTE (18H)
-    if (d === 0 && h <= 18) {
+    let h =
+      Math.floor((diferencia % 86400) / 3600);
 
-      clearInterval(latido);
+    let m =
+      Math.floor((diferencia % 3600) / 60);
 
-      latido = setInterval(() => {
-
-        contador.style.transform = "scale(1.25)";
-        contador.style.textShadow = "0 0 20px #ff4d88";
-
-        setTimeout(() => {
-          contador.style.transform = "scale(1)";
-          contador.style.textShadow = "none";
-        }, 200);
-
-      }, 400);
-    }
+    let s =
+      diferencia % 60;
 
     contador.innerHTML =
-      `💖 ${d}d ⏰ ${h}h 🌸 ${m}m ✨ ${s}s`;
+      `💖 ${d}d ${h}h ${m}m ${s}s`;
 
   }, 1000);
+
+  //
+  // 💓 LATIDO FUERTE
+  //
+  latido = setInterval(() => {
+
+    let c =
+      document.getElementById("contador");
+
+    let ahora =
+      new Date();
+
+    let objetivo =
+      new Date("2026-05-09T11:00:00");
+
+    let diff =
+      (objetivo - ahora) / 1000;
+
+    let intensidad = 1.12;
+
+    if (diff < 21600) {
+      intensidad = 1.18;
+    }
+
+    if (diff < 10800) {
+      intensidad = 1.23;
+    }
+
+    if (diff < 3600) {
+      intensidad = 1.3;
+    }
+
+    c.style.transition = "0.2s";
+
+    c.style.transform =
+      `scale(${intensidad})`;
+
+    c.style.textShadow =
+      "0 0 20px #ff4d88";
+
+    setTimeout(() => {
+
+      c.style.transform = "scale(1)";
+      c.style.textShadow = "none";
+
+    }, 200);
+
+  }, 500);
 
 }
 
 //
-// 👀 MENSAJE NORMAL
+// 💖 MENSAJES SECRETOS
 //
 function mostrarMensaje() {
 
-  let msg = document.getElementById("mensajeSecreto");
+  let msg =
+    document.getElementById("mensajeSecreto");
+
   if (!msg) return;
 
-  msg.textContent = mensajes[indice];
-  indice = (indice + 1) % mensajes.length;
+  msg.textContent =
+    mensajes[indice];
+
+  indice++;
+
+  if (indice >= mensajes.length) {
+    indice = 0;
+  }
 
   msg.classList.add("mostrar");
 
-  setTimeout(() => msg.classList.remove("mostrar"), 4000);
+  setTimeout(() => {
+
+    msg.classList.remove("mostrar");
+
+  }, 4000);
+
 }
 
 //
 // 💖 ROCY
 //
-function mostrarUlises() {
-
-  let box = document.createElement("div");
-
-  box.style.position = "fixed";
-  box.style.top = "50%";
-  box.style.left = "50%";
-  box.style.transform = "translate(-50%, -50%)";
-  box.style.background = "rgba(0,0,0,0.92)";
-  box.style.padding = "20px";
-  box.style.borderRadius = "20px";
-  box.style.boxShadow = "0 0 25px #00ffcc";
-  box.style.zIndex = "99999";
-  box.style.textAlign = "center";
-  box.style.maxWidth = "320px";
-  box.style.color = "#00ffcc";
-
-  box.innerHTML = `
-    🔥 ULISES 🔥<br><br>
-    Gracias carnal 👊<br>
-    Parte de este proyecto 💥<br><br>
-  `;
-
-  let img = document.createElement("img");
-  img.src = "img/ulices.jpg"; // 👈 tu foto
-  img.style.width = "100%";
-  img.style.borderRadius = "15px";
-  img.style.boxShadow = "0 0 15px #00ffcc";
-
-  box.appendChild(img);
-
-  document.body.appendChild(box);
-
-  setTimeout(() => box.remove(), 6000);
-}
 function mostrarRocy() {
 
-  let box = document.createElement("div");
-
-  box.style.position = "fixed";
-  box.style.top = "50%";
-  box.style.left = "50%";
-  box.style.transform = "translate(-50%, -50%)";
-  box.style.background = "rgba(0,0,0,0.92)";
-  box.style.padding = "20px";
-  box.style.borderRadius = "20px";
-  box.style.boxShadow = "0 0 25px #ff4d88";
-  box.style.zIndex = "99999";
-  box.style.textAlign = "center";
-  box.style.maxWidth = "320px";
-  box.style.color = "#ff4d88";
+  let box =
+    document.createElement("div");
 
   box.innerHTML = `
     💖 ROCY 💖<br><br>
-    Eres como una segunda mamá 🌸<br>
-    Gracias por todo 💐<br><br>
+    Eres como una segunda mamá 🌸<br><br>
+
+    <img src="img/fami.jpg"
+    style="
+    width:100%;
+    border-radius:15px;
+    box-shadow:0 0 20px #ff4d88;
+    ">
   `;
 
-  let img = document.createElement("img");
-  img.src = "img/fami.jpg"; // 👈 tu foto
-  img.style.width = "100%";
-  img.style.borderRadius = "15px";
-  img.style.boxShadow = "0 0 15px #ff4d88";
-
-  box.appendChild(img);
+  estiloCaja(box, "#ff4d88");
 
   document.body.appendChild(box);
 
-  setTimeout(() => box.remove(), 6000);
+  setTimeout(() => {
+
+    box.remove();
+
+  }, 6000);
+
 }
+
+//
+// 🔥 ULISES
+//
+function mostrarUlises() {
+
+  let box =
+    document.createElement("div");
+
+  box.innerHTML = `
+    🔥 ULISES 🔥<br><br>
+    Gracias carnal 👊<br><br>
+
+    <img src="img/ulices.jpg"
+    style="
+    width:100%;
+    border-radius:15px;
+    box-shadow:0 0 20px #00ffcc;
+    ">
+  `;
+
+  estiloCaja(box, "#00ffcc");
+
+  document.body.appendChild(box);
+
+  setTimeout(() => {
+
+    box.remove();
+
+  }, 6000);
+
+}
+
+//
+// ⏳ CASI
+//
+function mostrarCasi() {
+
+  let box =
+    document.createElement("div");
+
+  box.innerHTML =
+    "⏳ YA CASI ⏳<br><br>" +
+    "🎨 Los nuevos dibujos están por llegar";
+
+  estiloCaja(box, "#00ffcc");
+
+  document.body.appendChild(box);
+
+  setTimeout(() => {
+
+    box.remove();
+
+  }, 4000);
+
+}
+
 //
 // 🔐 EVENTO BLOQUEADO
 //
 function mostrarEventoBloqueado() {
 
-  let aviso = document.createElement("div");
+  let box =
+    document.createElement("div");
 
-  aviso.innerHTML =
+  box.innerHTML =
     "🔐 EVENTO 🔐<br><br>" +
-    "⏳ Aún no disponible<br>" +
-    "💖 Espera a que la cuenta llegue a 0";
+    "⏳ Aún no disponible";
 
-  aviso.style.position = "fixed";
-  aviso.style.top = "50%";
-  aviso.style.left = "50%";
-  aviso.style.transform = "translate(-50%, -50%)";
-  aviso.style.background = "rgba(0,0,0,0.95)";
-  aviso.style.color = "#ffcc00";
-  aviso.style.padding = "25px";
-  aviso.style.borderRadius = "20px";
-  aviso.style.zIndex = "99999";
-  aviso.style.textAlign = "center";
+  estiloCaja(box, "#ffd166");
 
-  document.body.appendChild(aviso);
+  document.body.appendChild(box);
 
-  setTimeout(() => aviso.remove(), 3000);
+  setTimeout(() => {
+
+    box.remove();
+
+  }, 3000);
+
 }
 
 //
-// 🎉 EVENTO REAL
+// 🎉 ACTIVAR EVENTO
 //
 function activarEvento() {
 
-  let aviso = document.createElement("div");
+  // 💥 FLASH
+  document.body.style.transition = "0.3s";
 
-  aviso.innerHTML = "🎉 EVENTO DISPONIBLE 🎉";
+  document.body.style.filter =
+    "brightness(3)";
 
-  aviso.style.position = "fixed";
-  aviso.style.top = "0";
-  aviso.style.left = "0";
-  aviso.style.width = "100%";
-  aviso.style.height = "100%";
-  aviso.style.background = "black";
-  aviso.style.display = "flex";
-  aviso.style.justifyContent = "center";
-  aviso.style.alignItems = "center";
-  aviso.style.fontSize = "2em";
-  aviso.style.color = "#00ffcc";
-  aviso.style.zIndex = "99999";
+  setTimeout(() => {
 
-  document.body.appendChild(aviso);
+    document.body.style.filter =
+      "brightness(1)";
 
-  setTimeout(() => aviso.remove(), 4000);
+  }, 300);
+
+  // 🌈 FONDO
+  document.body.style.background =
+    "linear-gradient(45deg,#ff4d88,#00b894,#0984e3)";
+
+  // 🎆 PARTICULAS
+  for (let i = 0; i < 80; i++) {
+
+    let p =
+      document.createElement("div");
+
+    p.innerHTML =
+      Math.random() > 0.5
+      ? "🎉"
+      : "💖";
+
+    p.style.position = "fixed";
+
+    p.style.left =
+      Math.random() * 100 + "%";
+
+    p.style.top =
+      Math.random() * 100 + "%";
+
+    p.style.fontSize = "25px";
+
+    p.style.zIndex = "99999";
+
+    document.body.appendChild(p);
+
+    setTimeout(() => {
+
+      p.remove();
+
+    }, 3000);
+
+  }
+
+  // ⌨️ TEXTO LETRA POR LETRA
+  let texto =
+    document.createElement("div");
+
+  texto.style.position = "fixed";
+
+  texto.style.top = "50%";
+
+  texto.style.left = "50%";
+
+  texto.style.transform =
+    "translate(-50%, -50%)";
+
+  texto.style.color = "white";
+
+  texto.style.fontSize = "2em";
+
+  texto.style.fontWeight = "bold";
+
+  texto.style.textAlign = "center";
+
+  texto.style.textShadow =
+    "0 0 20px #00ffcc";
+
+  texto.style.zIndex = "99999";
+
+  document.body.appendChild(texto);
+
+  let mensaje =
+    "🎉 EVENTO DISPONIBLE 🎉";
+
+  let i = 0;
+
+  let escribir =
+    setInterval(() => {
+
+    texto.innerHTML +=
+      mensaje.charAt(i);
+
+    i++;
+
+    if (i >= mensaje.length) {
+
+      clearInterval(escribir);
+
+    }
+
+  }, 100);
+
+}
+
+//
+// 💖 ESTILO CAJAS
+//
+function estiloCaja(box, color) {
+
+  box.style.position = "fixed";
+
+  box.style.top = "50%";
+
+  box.style.left = "50%";
+
+  box.style.transform =
+    "translate(-50%, -50%)";
+
+  box.style.background =
+    "rgba(0,0,0,0.92)";
+
+  box.style.color = color;
+
+  box.style.padding = "20px";
+
+  box.style.borderRadius = "20px";
+
+  box.style.boxShadow =
+    `0 0 25px ${color}`;
+
+  box.style.zIndex = "99999";
+
+  box.style.textAlign = "center";
+
+  box.style.maxWidth = "320px";
+
 }
 
 //
@@ -335,61 +462,30 @@ function activarEvento() {
 //
 function crearMarco() {
 
-  let m = document.createElement("div");
-  m.style.position = "fixed";
-  m.style.top = "12px";
-  m.style.left = "12px";
-  m.style.right = "12px";
-  m.style.bottom = "12px";
-  m.style.border = "6px solid #ffd6e7";
-  m.style.borderRadius = "25px";
-  m.style.pointerEvents = "none";
-  m.style.zIndex = "9999";
+  let marco =
+    document.createElement("div");
 
-  document.body.appendChild(m);
-}
+  marco.style.position = "fixed";
 
-//
-// ❤️ CORAZONES
-//
-function crearCorazones() {
+  marco.style.top = "10px";
 
-  let pos = [
-    { top: "10px", left: "10px" },
-    { top: "10px", right: "10px" },
-    { bottom: "10px", left: "10px" },
-    { bottom: "10px", right: "10px" }
-  ];
+  marco.style.left = "10px";
 
-  pos.forEach(p => {
+  marco.style.right = "10px";
 
-    let c = document.createElement("div");
-    c.innerHTML = "💖";
-    c.style.position = "fixed";
-    c.style.fontSize = "18px";
-    c.style.opacity = "0.6";
-    c.style.zIndex = "9999";
+  marco.style.bottom = "10px";
 
-    Object.assign(c.style, p);
+  marco.style.border =
+    "5px solid #ffb6c1";
 
-    document.body.appendChild(c);
-  });
+  marco.style.borderRadius =
+    "25px";
 
-}
+  marco.style.pointerEvents =
+    "none";
 
-//
-// ✨ ANIMACIÓN
-//
-function agregarAnimacion() {
+  marco.style.zIndex = "9999";
 
-  let s = document.createElement("style");
+  document.body.appendChild(marco);
 
-  s.innerHTML = `
-  @keyframes flotar {
-    0%{transform:translateY(0)}
-    50%{transform:translateY(-8px)}
-    100%{transform:translateY(0)}
-  }`;
-
-  document.head.appendChild(s);
 }
