@@ -3,39 +3,66 @@
 <head>
   <meta charset="UTF-8">
   <title>Evento</title>
-  <!--<link rel="stylesheet" href="estilos.css">-->
   <link rel="stylesheet" href="regresiva.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect"  href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com"crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Cursive:wght@400..700&display=swap" rel="stylesheet">
-  <link rel="icon" href="img/jackie.jpg">
+  <link rel="icon"  href="img/jackie.jpg">
 </head>
 <body>
 
-  <h1>💐 Evento Día de las Madres 💐</h1>
-  <p>Disponible en:</p>
+  <!-- 💐 TITULO -->
+  <h1 id="tituloEvento">
+    💐 Evento Día de las Madres 💐
+  </h1>
 
-  <div id="contador">Cargando...</div>
+  <!-- ⏳ TEXTO -->
+  <p class="textoDisponible">
+    Disponible en:
+  </p>
+
+  <!-- ⏳ CONTADOR -->
+  <div id="contador">
+    Cargando...
+  </div>
+
+  <!-- 💖 FRASE -->
   <p class="frase">
     Un evento especial lleno de sorpresas y nuevos dibujos
   </p>
+
+  <!-- 👀 MISTERIO -->
   <p class="misterio">
     👀 Algunos secretos aparecerán antes del evento…
   </p>
+
+  <!-- 💬 MENSAJE RANDOM -->
   <p id="randomMsg"></p>
 
+  <!-- 🔘 BOTON -->
   <ul>
+
     <li>
-      <a href="file:///C:/Users/PILARES/Documents/gustavo/pagina_shop2.0-main/pagina_shop2.0-main/index.html" id="linkEvento" class="bloqueado" target="_blank">
-        <button class="boton_menu">Evento</button>
+
+      <a
+      href="index.html"id="linkEvento"class="bloqueado"target="_blank">
+        <button class="boton_menu">
+          Evento
+        </button>
+
       </a>
+
     </li>
+
   </ul>
+
+  <!-- 👀 MENSAJE SECRETO -->
   <div id="mensajeSecreto">
     👀 Prepárate… algo especial está por venir 💐
- </div>
- <div id="mensajeSecreto"></div>
+  </div>
 
+  <!-- JS -->
   <script src="regresiva.js"></script>
+
 </body>
 </html>
