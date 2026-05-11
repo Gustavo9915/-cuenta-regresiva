@@ -1,34 +1,47 @@
+/* ====================================== */
 /* 💖 BODY */
-body {
+/* ====================================== */
 
-  text-align: center;
+body{
+
+  text-align:center;
 
   background:
-    linear-gradient(45deg,
+  linear-gradient(
+    45deg,
     #1e1e2f,
-    #2d1b4d);
+    #2d1b4d,
+    #13293d
+  );
 
-  background-size: 400% 400%;
+  background-size:400% 400%;
 
   animation:
-    aurora 15s ease infinite;
+  aurora 15s ease infinite;
 
-  color: white;
+  color:white;
 
   font-family:
-    "Edu NSW ACT Cursive",
-    cursive;
+  "Edu NSW ACT Cursive",
+  cursive;
 
-  transition: 2s;
+  overflow-x:hidden;
 
-  overflow-x: hidden;
+  min-height:100vh;
 
-  min-height: 100vh;
+  margin:0;
+
+  padding:20px;
+
+  box-sizing:border-box;
 
 }
 
+/* ====================================== */
 /* 🌈 FONDO */
-@keyframes aurora {
+/* ====================================== */
+
+@keyframes aurora{
 
   0%{
     background-position:0% 50%;
@@ -44,14 +57,61 @@ body {
 
 }
 
+/* ====================================== */
+/* 💖 TODO */
+/* ====================================== */
+
+*{
+
+  box-sizing:border-box;
+
+}
+
+/* ====================================== */
+/* 📦 CONTENEDOR */
+/* ====================================== */
+
+.contenedor{
+
+  position:relative;
+
+  z-index:5;
+
+  margin:40px auto;
+
+  padding:30px;
+
+  width:90%;
+
+  max-width:750px;
+
+  border-radius:25px;
+
+  border:
+  2px solid #ffb6c1;
+
+  background:
+  rgba(0,0,0,0.25);
+
+  backdrop-filter:blur(6px);
+
+  box-shadow:
+    0 0 10px #ff4d88,
+    0 0 25px #00ffcc;
+
+}
+
+/* ====================================== */
 /* 💐 TITULO */
-#tituloEvento {
+/* ====================================== */
 
-  font-size: 3.2em;
+#tituloEvento{
 
-  margin-top: 25px;
+  font-size:3em;
 
-  color: white;
+  margin-top:10px;
+
+  color:white;
 
   text-shadow:
     0 0 10px #ff4d88,
@@ -61,12 +121,23 @@ body {
   animation:
     brilloTitulo 2s infinite alternate;
 
+  transition:0.4s;
+
 }
 
-/* ✨ TITULO ANIMADO */
-@keyframes brilloTitulo {
+#tituloEvento:hover{
 
-  from {
+  transform:scale(1.03);
+
+}
+
+/* ====================================== */
+/* ✨ TITULO */
+/* ====================================== */
+
+@keyframes brilloTitulo{
+
+  from{
 
     text-shadow:
       0 0 10px #ff4d88,
@@ -74,7 +145,7 @@ body {
 
   }
 
-  to {
+  to{
 
     text-shadow:
       0 0 15px #00ffcc,
@@ -84,43 +155,35 @@ body {
 
 }
 
-/* 📦 CONTENEDOR */
-.contenedor {
+/* ====================================== */
+/* ⏳ TEXTO */
+/* ====================================== */
 
-  margin: 40px auto;
+.textoDisponible{
 
-  padding: 30px;
+  margin-top:10px;
 
-  width: 85%;
+  font-size:22px;
 
-  max-width: 700px;
-
-  border: 2px solid #ffb6c1;
-
-  border-radius: 25px;
-
-  box-shadow:
-    0 0 10px #ff4d88,
-    0 0 25px #00ffcc;
-
-  background:
-    rgba(0,0,0,0.25);
-
-  backdrop-filter:
-    blur(5px);
+  opacity:0.9;
 
 }
 
+/* ====================================== */
 /* ⏳ CONTADOR */
-#contador {
+/* ====================================== */
 
-  font-size: 2.8em;
+#contador{
 
-  margin: 25px;
+  font-size:2.7em;
 
-  transition: 0.3s;
+  margin:25px;
 
-  color: white;
+  color:white;
+
+  font-weight:bold;
+
+  letter-spacing:2px;
 
   text-shadow:
     0 0 10px #ff4d88,
@@ -129,10 +192,15 @@ body {
   animation:
     latido 1.2s infinite;
 
+  transition:0.3s;
+
 }
 
+/* ====================================== */
 /* 💓 LATIDO */
-@keyframes latido {
+/* ====================================== */
+
+@keyframes latido{
 
   0%{
     transform:scale(1);
@@ -148,33 +216,114 @@ body {
 
 }
 
+/* ====================================== */
+/* 💖 FRASES */
+/* ====================================== */
+
+.frase,
+.misterio{
+
+  margin-top:15px;
+
+  font-size:20px;
+
+  opacity:0.9;
+
+  text-align:center;
+
+}
+
+.frase{
+
+  color:white;
+
+  animation:
+    flotarSuave 3s infinite;
+
+}
+
+.misterio{
+
+  color:#00ffcc;
+
+  font-style:italic;
+
+}
+
+/* ====================================== */
+/* ✨ FLOTAR */
+/* ====================================== */
+
+@keyframes flotarSuave{
+
+  0%{
+    transform:translateY(0px);
+  }
+
+  50%{
+    transform:translateY(-5px);
+  }
+
+  100%{
+    transform:translateY(0px);
+  }
+
+}
+
+/* ====================================== */
+/* 💬 MENSAJES */
+/* ====================================== */
+
+#randomMsg{
+
+  margin-top:15px;
+
+  color:#ffb6c1;
+
+  font-style:italic;
+
+  opacity:0.9;
+
+  min-height:25px;
+
+  font-size:18px;
+
+  transition:0.4s;
+
+}
+
+/* ====================================== */
 /* 🔘 BOTON */
-.boton_menu {
+/* ====================================== */
 
-  padding: 14px 28px;
+.boton_menu{
 
-  font-size: 17px;
+  padding:14px 28px;
 
-  border: none;
+  font-size:17px;
 
-  border-radius: 15px;
+  border:none;
+
+  border-radius:15px;
+
+  min-width:220px;
 
   background:
-    linear-gradient(
-      45deg,
-      #ff4d88,
-      #00b894
-    );
+  linear-gradient(
+    45deg,
+    #ff4d88,
+    #00b894
+  );
 
-  color: white;
+  color:white;
 
-  cursor: pointer;
+  cursor:pointer;
 
-  transition: 0.3s;
+  transition:0.3s;
 
   font-family:
-    "Edu NSW ACT Cursive",
-    cursive;
+  "Edu NSW ACT Cursive",
+  cursive;
 
   box-shadow:
     0 0 10px #ff4d88,
@@ -182,10 +331,9 @@ body {
 
 }
 
-.boton_menu:hover {
+.boton_menu:hover{
 
-  transform:
-    scale(1.08);
+  transform:scale(1.08);
 
   box-shadow:
     0 0 20px #ff4d88,
@@ -193,166 +341,119 @@ body {
 
 }
 
+/* ====================================== */
 /* 🔒 BLOQUEADO */
-.bloqueado {
+/* ====================================== */
 
-  pointer-events: none;
+.bloqueado{
 
-  opacity: 0.5;
+  pointer-events:none;
 
-}
-
-.bloqueado button {
-
-  background: gray;
-
-  cursor: not-allowed;
+  opacity:0.5;
 
 }
 
+.bloqueado button{
+
+  background:gray;
+
+  cursor:not-allowed;
+
+}
+
+/* ====================================== */
 /* 🔓 ACTIVO */
-.activo button {
+/* ====================================== */
+
+.activo button{
 
   background:
-    linear-gradient(
-      45deg,
-      #00b894,
-      #00ffcc
-    );
-
-  cursor: pointer;
+  linear-gradient(
+    45deg,
+    #00b894,
+    #00ffcc
+  );
 
 }
 
-/* 👀 MENSAJE SECRETO */
-#mensajeSecreto {
+/* ====================================== */
+/* 📋 LISTA */
+/* ====================================== */
 
-  position: fixed;
+ul{
 
-  bottom: -100px;
+  list-style:none;
 
-  left: 50%;
+  padding:0;
 
-  transform:
-    translateX(-50%);
+  margin-top:30px;
 
-  background: #111;
+}
 
-  color: #00ffe0;
+/* ====================================== */
+/* 👀 MENSAJE */
+/* ====================================== */
 
-  padding: 15px 25px;
+#mensajeSecreto{
 
-  border-radius: 15px;
+  position:fixed;
 
-  opacity: 0;
+  bottom:-100px;
 
-  transition: 0.5s;
+  left:50%;
+
+  transform:translateX(-50%);
+
+  background:#111;
+
+  color:#00ffe0;
+
+  padding:15px 25px;
+
+  border-radius:15px;
+
+  opacity:0;
+
+  transition:0.5s;
 
   box-shadow:
     0 0 15px #00ffe0;
 
-  z-index: 99999;
+  z-index:99999;
 
 }
 
-#mensajeSecreto.mostrar {
+#mensajeSecreto.mostrar{
 
-  bottom: 30px;
+  bottom:30px;
 
-  opacity: 1;
-
-}
-
-/* 💖 FRASES */
-.frase,
-.misterio {
-
-  margin-top: 15px;
-
-  font-size: 20px;
-
-  opacity: 0.9;
-
-  text-align: center;
+  opacity:1;
 
 }
 
-.frase {
-
-  color: white;
-
-}
-
-.misterio {
-
-  color: #00ffcc;
-
-  font-style: italic;
-
-}
-
-/* 👀 RANDOM */
-#randomMsg {
-
-  margin-top: 15px;
-
-  color: #ffb6c1;
-
-  font-style: italic;
-
-  opacity: 0.9;
-
-  min-height: 25px;
-
-  font-size: 18px;
-
-}
-
-/* 📝 TEXTO */
-.textoDisponible {
-
-  margin-top: 10px;
-
-  font-size: 22px;
-
-  opacity: 0.9;
-
-}
-
-/* 📋 LISTA */
-ul {
-
-  list-style: none;
-
-  padding: 0;
-
-  margin-top: 30px;
-
-}
-
+/* ====================================== */
 /* 💖 BORDE */
-body::before {
+/* ====================================== */
 
-  content: "";
+body::before{
 
-  position: fixed;
+  content:"";
 
-  top: 10px;
+  position:fixed;
 
-  left: 10px;
-
-  right: 10px;
-
-  bottom: 10px;
+  top:10px;
+  left:10px;
+  right:10px;
+  bottom:10px;
 
   border:
-    4px solid #ffb6c1;
+  4px solid #ffb6c1;
 
-  border-radius: 25px;
+  border-radius:25px;
 
-  pointer-events: none;
+  pointer-events:none;
 
-  z-index: 9999;
+  z-index:9999;
 
   box-shadow:
     0 0 15px #ff4d88,
@@ -363,17 +464,20 @@ body::before {
 
 }
 
+/* ====================================== */
 /* ✨ BORDE */
-@keyframes bordeGlow {
+/* ====================================== */
 
-  from {
+@keyframes bordeGlow{
+
+  from{
 
     box-shadow:
       0 0 10px #ff4d88;
 
   }
 
-  to {
+  to{
 
     box-shadow:
       0 0 25px #00ffcc;
@@ -382,35 +486,106 @@ body::before {
 
 }
 
+/* ====================================== */
+/* 🖼️ IMG */
+/* ====================================== */
+
+img{
+
+  max-width:100%;
+
+  height:auto;
+
+  border-radius:15px;
+
+}
+
+/* ====================================== */
+/* ✨ SCROLL */
+/* ====================================== */
+
+::-webkit-scrollbar{
+
+  width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+  background:#1e1e2f;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+  background:#ff4d88;
+
+  border-radius:10px;
+
+}
+
+/* ====================================== */
 /* 📱 RESPONSIVE */
-@media (max-width: 600px) {
+/* ====================================== */
 
-  #contador {
+@media (max-width:600px){
 
-    font-size: 1.9em;
+  body{
+
+    padding:15px;
 
   }
 
-  #tituloEvento {
+  .contenedor{
 
-    font-size: 2em;
+    width:100%;
 
-    padding: 0 10px;
+    padding:20px;
+
+  }
+
+  #tituloEvento{
+
+    font-size:2em;
+
+    padding:0 10px;
+
+  }
+
+  #contador{
+
+    font-size:1.7em;
+
+    word-break:break-word;
+
+  }
+
+  .textoDisponible{
+
+    font-size:18px;
 
   }
 
   .frase,
-  .misterio {
+  .misterio{
 
-    font-size: 16px;
+    font-size:16px;
 
-    padding: 0 10px;
+    padding:0 10px;
 
   }
 
-  .boton_menu {
+  #randomMsg{
 
-    width: 80%;
+    font-size:15px;
+
+  }
+
+  .boton_menu{
+
+    width:100%;
+
+    min-width:auto;
 
   }
 
