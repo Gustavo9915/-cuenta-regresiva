@@ -1,11 +1,9 @@
 // ======================================
-// 🎉 CUENTA REGRESIVA ANIVERSARIO
+// 🎂 FECHA DEL CUMPLE
 // ======================================
 
-const FECHA_ANIVERSARIO =
-new Date("2026-05-16T20:00:00");
-
-let intervaloAniversario;
+const FECHA_CUMPLE =
+  new Date("2026-05-22T00:00:00");
 
 // ======================================
 // 🚀 INICIO
@@ -13,19 +11,15 @@ let intervaloAniversario;
 
 window.onload = () => {
 
-  iniciarCuentaAniversario();
+  iniciarContador();
 
-  crearMarcoAniversario();
+  mensajesRandom();
 
-  particulasAniversario();
+  particulasCumple();
 
-  mensajesAniversario();
+  efectoCursor();
 
-  efectosCursor();
-
-  agregarImagenes();
-
-  activarLlaveSecreta();
+  clickSecretos();
 
 };
 
@@ -33,104 +27,155 @@ window.onload = () => {
 // ⏳ CONTADOR
 // ======================================
 
-function iniciarCuentaAniversario() {
+function iniciarContador() {
 
-  let contador =
+  const contador =
     document.getElementById("contador");
 
-  intervaloAniversario =
+  if (!contador) return;
+
+  let eventoActivado = false;
+
   setInterval(() => {
 
-    let ahora =
-      new Date();
+    const ahora =
+      new Date().getTime();
 
-    let diferencia =
-      Math.floor(
-        (FECHA_ANIVERSARIO - ahora) / 1000
-      );
+    const objetivo =
+      FECHA_CUMPLE.getTime();
 
-    // 🎉 EVENTO
-    if (diferencia <= 0) {
+    const diferencia =
+      objetivo - ahora;
 
-      clearInterval(intervaloAniversario);
+    // ======================================
+    // 🎉 EVENTO FINAL
+    // ======================================
 
-      activarAniversario();
+    if (
+      diferencia <= 0 &&
+      !eventoActivado
+    ) {
+
+      eventoActivado = true;
+
+      contador.innerHTML =
+        "🎂 FELIZ CUMPLEAÑOS 🎂";
+
+      activarEvento();
 
       return;
 
     }
 
-    let d =
-      Math.floor(diferencia / 86400);
+    // ======================================
+    // ⏳ CALCULO
+    // ======================================
 
-    let h =
+    const dias =
       Math.floor(
-        (diferencia % 86400) / 3600
+        diferencia /
+        (1000 * 60 * 60 * 24)
       );
 
-    let m =
+    const horas =
       Math.floor(
-        (diferencia % 3600) / 60
+        (
+          diferencia %
+          (1000 * 60 * 60 * 24)
+        ) /
+        (1000 * 60 * 60)
       );
 
-    let s =
-      diferencia % 60;
+    const minutos =
+      Math.floor(
+        (
+          diferencia %
+          (1000 * 60 * 60)
+        ) /
+        (1000 * 60)
+      );
+
+    const segundos =
+      Math.floor(
+        (
+          diferencia %
+          (1000 * 60)
+        ) / 1000
+      );
+
+    // ======================================
+    // 🎂 MOSTRAR
+    // ======================================
 
     contador.innerHTML =
-      `🎉 ${d}d ${h}h ${m}m ${s}s`;
-
-    // 💓 LATIDO
-    contador.style.transform =
-      "scale(1.08)";
-
-    setTimeout(() => {
-
-      contador.style.transform =
-        "scale(1)";
-
-    }, 400);
+    `
+    🎂 ${dias}d
+    ${horas}h
+    ${minutos}m
+    ${segundos}s
+    `;
 
   }, 1000);
 
 }
 
 // ======================================
-// 🎉 ACTIVAR EVENTO
+// 🎉 EVENTO FINAL
 // ======================================
 
-function activarAniversario() {
+function activarEvento() {
 
-  // 🌈 FONDO
+  // 🌈 CAMBIAR FONDO
   document.body.style.background =
   `
   linear-gradient(
-    45deg,
-    #0f2027,
-    #203a43,
-    #2c5364
+    135deg,
+    #ff9a9e,
+    #fad0c4,
+    #fbc2eb
   )
   `;
 
-  // 🎊 PARTICULAS
+  // 🎈 PARTICULAS
   for (let i = 0; i < 120; i++) {
 
-    let p =
+    const p =
       document.createElement("div");
 
+    const emojis = [
+
+      "🎂",
+      "🎉",
+      "💖",
+      "✨",
+      "🎈"
+
+    ];
+
     p.innerHTML =
-      Math.random() > 0.5
-      ? "🎉"
-      : "💖";
+      emojis[
+        Math.floor(
+          Math.random() *
+          emojis.length
+        )
+      ];
 
     p.style =
     `
     position:fixed;
+
     left:${Math.random()*100}%;
+
     top:${Math.random()*100}%;
-    font-size:25px;
-    z-index:99999;
+
+    font-size:30px;
+
+    z-index:999999;
+
     pointer-events:none;
-    animation:flotar 2s infinite;
+
+    animation:
+      flotar 2s infinite;
     `;
 
     document.body.appendChild(p);
@@ -143,27 +188,56 @@ function activarAniversario() {
 
   }
 
-  // 🎉 PANTALLA
-  let pantalla =
+  // ======================================
+  // 💖 MENSAJE PRINCIPAL
+  // ======================================
+
+  const pantalla =
     document.createElement("div");
 
   pantalla.innerHTML =
   `
   <div style="text-align:center;">
 
-    🎉 ANIVERSARIO 🎉
+    <div style="
+      font-size:1.3em;
+      margin-bottom:20px;
+      animation:latido 2s infinite;
+    ">
+      🎂 FELIZ CUMPLEAÑOS 🎂
+    </div>
 
-    <br><br>
-
-    <span style="
-      font-size:0.45em;
-      color:#74b9ff;
+    <div style="
+      font-size:0.42em;
+      line-height:1.8;
+      max-width:700px;
+      margin:auto;
+      color:#ffd6f6;
     ">
 
-      💖 Gracias por acompañarme
-      desde el inicio
+      💖 Hoy es un día muy especial
+      porque hoy cumple años
+      una persona increíble ✨
 
-    </span>
+      <br><br>
+
+      Gracias por cada risa,
+      cada momento bonito
+      y por siempre iluminar
+      todo con tu presencia 🎈
+
+      <br><br>
+
+      Espero que tengas
+      un día lleno de felicidad,
+      regalos, abrazos
+      y muchas sonrisas 🎁
+
+      <br><br>
+
+      💖 Feliz cumpleaños 💖
+
+    </div>
 
   </div>
   `;
@@ -171,265 +245,69 @@ function activarAniversario() {
   pantalla.style =
   `
   position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
 
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  inset:0;
 
   background:
-    rgba(0,0,0,0.95);
+    rgba(0,0,0,0.92);
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  text-align:center;
 
   color:white;
 
   font-size:3em;
 
+  padding:30px;
+
   z-index:999999;
 
   text-shadow:
-    0 0 20px #74b9ff;
+    0 0 20px white;
 
   animation:
     aparecer 1s ease;
   `;
 
-  document.body.appendChild(pantalla);
-
-  // 💬 MENSAJE EXTRA
-  setTimeout(() => {
-
-    let extra =
-      document.createElement("div");
-
-    extra.innerHTML =
-    `
-    👀 Gracias por todo el apoyo
-
-    <br><br>
-
-    🎨 Nuevos dibujos disponibles
-    `;
-
-    extra.style =
-    `
-    position:fixed;
-    bottom:30px;
-    left:50%;
-    transform:translateX(-50%);
-    background:black;
-    color:white;
-    padding:20px;
-    border-radius:20px;
-    box-shadow:0 0 20px #74b9ff;
-    z-index:999999;
-    text-align:center;
-    `;
-
-    document.body.appendChild(extra);
-
-  }, 3000);
-
-  // 🔓 BOTON
-  let link =
-    document.getElementById("linkEvento");
-
-  if (link) {
-
-    link.classList.remove("bloqueado");
-
-    link.classList.add("activo");
-
-  }
-
-  // ⏳ REDIRIGIR
-  setTimeout(() => {
-
-    window.location.href =
-      "tienda.html";
-
-  }, 15000);
+  document.body.appendChild(
+    pantalla
+  );
 
 }
 
 // ======================================
-// 🔐 LLAVE
+// 💬 MENSAJES RANDOM
 // ======================================
 
-function activarLlaveSecreta() {
+function mensajesRandom() {
 
-  let clave = "";
+  const frases = [
 
-  document.addEventListener("keydown", (e) => {
+    "🎂 Ya casi comienza el cumpleaños",
 
-    clave +=
-      e.key.toLowerCase();
+    "💖 Preparando sorpresa especial",
 
-    if (clave.includes("aniversario")) {
+    "🎈 Faltan pocos momentos",
 
-      mensajeDesarrollo();
+    "✨ Cuenta regresiva activada",
 
-      clave = "";
+    "🎉 Evento especial cargando",
 
-    }
+    "👀 Easter eggs escondidos",
 
-    if (clave.length > 20) {
-
-      clave = "";
-
-    }
-
-  });
-
-}
-
-// ======================================
-// 💬 MENSAJE DESARROLLO
-// ======================================
-
-function mensajeDesarrollo() {
-
-  let box =
-    document.createElement("div");
-
-  box.innerHTML =
-  `
-  💖 Gracias por acompañarme
-  desde las primeras versiones
-  de la página.
-
-  <br><br>
-
-  👀 Todo empezó como un pequeño
-  proyecto y ahora ya llegó
-  el aniversario.
-  `;
-
-  box.style =
-  `
-  position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  background:rgba(0,0,0,0.95);
-  color:white;
-  padding:25px;
-  border-radius:20px;
-  box-shadow:0 0 20px #74b9ff;
-  z-index:999999;
-  text-align:center;
-  max-width:320px;
-  `;
-
-  document.body.appendChild(box);
-
-  setTimeout(() => {
-
-    box.remove();
-
-  }, 7000);
-
-}
-
-// ======================================
-// 💖 MARCO
-// ======================================
-
-function crearMarcoAniversario() {
-
-  let marco =
-    document.createElement("div");
-
-  marco.style =
-  `
-  position:fixed;
-  top:10px;
-  left:10px;
-  right:10px;
-  bottom:10px;
-  border:4px solid #74b9ff;
-  border-radius:25px;
-  pointer-events:none;
-  z-index:9999;
-  box-shadow:0 0 20px #74b9ff;
-  animation:brillo 2s infinite alternate;
-  `;
-
-  document.body.appendChild(marco);
-
-}
-
-// ======================================
-// ✨ PARTICULAS
-// ======================================
-
-function particulasAniversario() {
-
-  setInterval(() => {
-
-    let p =
-      document.createElement("div");
-
-    p.innerHTML =
-      Math.random() > 0.5
-      ? "✨"
-      : "💙";
-
-    p.style =
-    `
-    position:fixed;
-    left:${Math.random()*100}%;
-    top:-20px;
-    font-size:20px;
-    opacity:0.7;
-    z-index:1;
-    pointer-events:none;
-    transition:5s linear;
-    `;
-
-    document.body.appendChild(p);
-
-    setTimeout(() => {
-
-      p.style.top =
-        "110%";
-
-    }, 50);
-
-    setTimeout(() => {
-
-      p.remove();
-
-    }, 5000);
-
-  }, 350);
-
-}
-
-// ======================================
-// 💬 MENSAJES
-// ======================================
-
-function mensajesAniversario() {
-
-  let frases = [
-
-    "🎉 Gracias por seguir aquí",
-
-    "💖 Un año más de dibujos",
-
-    "✨ El aniversario se acerca",
-
-    "🎨 Gracias por apoyar mi página",
-
-    "👀 Algo especial llegará pronto"
+    "💌 Mensajes secretos desbloqueables"
 
   ];
 
-  let texto =
-    document.getElementById("randomMsg");
+  const texto =
+    document.getElementById(
+      "randomMsg"
+    );
 
   if (!texto) return;
 
@@ -443,7 +321,9 @@ function mensajesAniversario() {
     i++;
 
     if (i >= frases.length) {
+
       i = 0;
+
     }
 
     texto.style.opacity =
@@ -464,48 +344,68 @@ function mensajesAniversario() {
 }
 
 // ======================================
-// 🖼️ IMAGENES
+// 🎈 PARTICULAS
 // ======================================
 
-function agregarImagenes() {
+function particulasCumple() {
 
-  let img1 =
-    document.createElement("img");
+  setInterval(() => {
 
-  img1.src =
-    "img/amiga.jpg";
+    const p =
+      document.createElement("div");
 
-  img1.style =
-  `
-  width:220px;
-  position:fixed;
-  left:25px;
-  bottom:25px;
-  border-radius:20px;
-  box-shadow:0 0 20px #74b9ff;
-  animation:flotar 3s infinite;
-  `;
+    const emojis = [
 
-  document.body.appendChild(img1);
+      "✨",
+      "💖",
+      "🎈",
+      "🎂"
 
-  let img2 =
-    document.createElement("img");
+    ];
 
-  img2.src =
-    "img/amiga2.jpg";
+    p.innerHTML =
+      emojis[
+        Math.floor(
+          Math.random() *
+          emojis.length
+        )
+      ];
 
-  img2.style =
-  `
-  width:220px;
-  position:fixed;
-  right:25px;
-  bottom:25px;
-  border-radius:20px;
-  box-shadow:0 0 20px #ffffff;
-  animation:flotar 3s infinite;
-  `;
+    p.style =
+    `
+    position:fixed;
 
-  document.body.appendChild(img2);
+    left:${Math.random()*100}%;
+
+    top:-20px;
+
+    font-size:22px;
+
+    opacity:0.8;
+
+    z-index:1;
+
+    pointer-events:none;
+
+    transition:5s linear;
+    `;
+
+    document.body.appendChild(p);
+
+    setTimeout(() => {
+
+      p.style.top =
+        "110%";
+
+    }, 50);
+
+    setTimeout(() => {
+
+      p.remove();
+
+    }, 5000);
+
+  }, 500);
 
 }
 
@@ -513,266 +413,183 @@ function agregarImagenes() {
 // ✨ CURSOR
 // ======================================
 
-function efectosCursor() {
+function efectoCursor() {
 
-  document.addEventListener("mousemove", (e) => {
+  document.addEventListener(
+    "mousemove",
+    (e) => {
 
-    let star =
-      document.createElement("div");
+      const star =
+        document.createElement(
+          "div"
+        );
 
-    star.innerHTML =
-      "✨";
+      star.innerHTML =
+        "✨";
 
-    star.style =
-    `
-    position:fixed;
-    left:${e.clientX}px;
-    top:${e.clientY}px;
-    pointer-events:none;
-    font-size:14px;
-    z-index:99999;
-    `;
+      star.style =
+      `
+      position:fixed;
 
-    document.body.appendChild(star);
+      left:${e.clientX}px;
 
-    setTimeout(() => {
+      top:${e.clientY}px;
 
-      star.style.transition =
-        "1s";
+      pointer-events:none;
 
-      star.style.opacity =
-        "0";
+      font-size:14px;
 
-      star.style.transform =
-        "translateY(-20px)";
+      z-index:99999;
+      `;
 
-    }, 10);
+      document.body.appendChild(
+        star
+      );
 
-    setTimeout(() => {
+      setTimeout(() => {
 
-      star.remove();
+        star.style.transition =
+          "1s";
 
-    }, 1000);
+        star.style.opacity =
+          "0";
 
-  });
+        star.style.transform =
+          "translateY(-20px)";
 
-}
+      }, 10);
 
-// ======================================
-// 🎨 CSS EXTRA
-// ======================================
+      setTimeout(() => {
 
-let style =
-document.createElement("style");
+        star.remove();
 
-style.innerHTML = `
-
-@keyframes flotar {
-
-  0%{
-    transform:translateY(0px);
-  }
-
-  50%{
-    transform:translateY(-10px);
-  }
-
-  100%{
-    transform:translateY(0px);
-  }
-
-}
-
-@keyframes brillo {
-
-  from{
-    box-shadow:0 0 10px #74b9ff;
-  }
-
-  to{
-    box-shadow:0 0 25px #ffffff;
-  }
-
-}
-
-@keyframes aparecer {
-
-  from{
-    opacity:0;
-    transform:scale(1.2);
-  }
-
-  to{
-    opacity:1;
-    transform:scale(1);
-  }
-
-}
-
-`;
-
-document.head.appendChild(style);
-
-// ======================================
-// 👀 GLITCH ALEATORIO
-// ======================================
-
-function glitchAleatorio() {
-
-  let mensajes = [
-
-    "ERROR_404.tmp",
-    "restaurando_evento...",
-    "cargando_recuerdos...",
-    "fase_1_detectada",
-    "evento_corrupto?",
-    "🎨 recuperando archivos...",
-    "💖 cargando aniversario..."
-
-  ];
-
-  setInterval(() => {
-
-    // 🎲 PROBABILIDAD
-    let probabilidad =
-      Math.random();
-
-    // 👀 SOLO A VECES
-    if (probabilidad > 0.20) return;
-
-    // ======================================
-    // 📦 CAJA GLITCH
-    // ======================================
-
-    let glitch =
-      document.createElement("div");
-
-    glitch.innerHTML =
-      mensajes[
-        Math.floor(
-          Math.random() * mensajes.length
-        )
-      ];
-
-    glitch.style =
-    `
-    position:fixed;
-
-    top:${Math.random()*80}%;
-
-    left:${Math.random()*70}%;
-
-    background:black;
-
-    color:#00ffcc;
-
-    padding:15px 20px;
-
-    border-radius:10px;
-
-    font-size:20px;
-
-    font-family:monospace;
-
-    z-index:999999;
-
-    box-shadow:
-      0 0 20px #00ffcc;
-
-    animation:
-      glitchAnim 0.1s infinite;
-    `;
-
-    document.body.appendChild(glitch);
-
-    // ======================================
-    // ⚡ EFECTO PANTALLA
-    // ======================================
-
-    document.body.style.transition =
-      "0.1s";
-
-    document.body.style.filter =
-      "contrast(1.5) hue-rotate(40deg)";
-
-    let contador =
-      document.getElementById("contador");
-
-    if (contador) {
-
-      contador.style.transform =
-        "translateX(5px)";
+      }, 1000);
 
     }
 
-    // ======================================
-    // ❌ QUITAR
-    // ======================================
-
-    setTimeout(() => {
-
-      glitch.remove();
-
-      document.body.style.filter =
-        "none";
-
-      if (contador) {
-
-        contador.style.transform =
-          "translateX(0px)";
-
-      }
-
-    }, 700);
-
-  }, 7000);
+  );
 
 }
 
 // ======================================
-// 🚀 ACTIVAR
+// 👀 MENSAJES SECRETOS
 // ======================================
 
-// AGREGA ESTO EN window.onload
+function clickSecretos() {
 
-glitchAleatorio();
+  const mensajes = [
 
-// ======================================
-// 🎨 CSS EXTRA
-// ======================================
+    "💖 Feliz cumpleaños",
 
-let glitchStyle =
-document.createElement("style");
+    "🎂 Espero que sonrías mucho hoy",
 
-glitchStyle.innerHTML = `
+    "✨ Eres increíble",
 
-@keyframes glitchAnim {
+    "🎈 Mini sorpresa desbloqueada",
 
-  0%{
-    transform:translate(0px);
-    opacity:1;
-  }
+    "💌 Mensaje secreto encontrado",
 
-  25%{
-    transform:translate(-3px,2px);
-  }
+    "👀 Gracias por existir",
 
-  50%{
-    transform:translate(3px,-2px);
-    opacity:0.8;
-  }
+    "🎁 Has encontrado un easter egg",
 
-  75%{
-    transform:translate(-2px,-2px);
-  }
+    "💖 Nunca olvides lo especial que eres"
 
-  100%{
-    transform:translate(0px);
-    opacity:1;
-  }
+  ];
+
+  let bloqueado = false;
+
+  document.addEventListener(
+    "click",
+    (e) => {
+
+      if (bloqueado) return;
+
+      bloqueado = true;
+
+      const msg =
+        document.createElement(
+          "div"
+        );
+
+      msg.innerHTML =
+        mensajes[
+          Math.floor(
+            Math.random() *
+            mensajes.length
+          )
+        ];
+
+      msg.style =
+      `
+      position:fixed;
+
+      left:${e.clientX}px;
+
+      top:${e.clientY}px;
+
+      transform:
+        translate(-50%,-50%);
+
+      background:
+        rgba(0,0,0,0.88);
+
+      color:white;
+
+      padding:14px 20px;
+
+      border-radius:18px;
+
+      font-size:17px;
+
+      z-index:999999;
+
+      pointer-events:none;
+
+      backdrop-filter:blur(6px);
+
+      box-shadow:
+        0 0 15px #ff4d88,
+        0 0 25px #00ffcc;
+
+      animation:
+        aparecerClick 0.4s ease;
+      `;
+
+      document.body.appendChild(
+        msg
+      );
+
+      // ✨ DESAPARECER
+      setTimeout(() => {
+
+        msg.style.transition =
+          "1.5s";
+
+        msg.style.opacity =
+          "0";
+
+        msg.style.transform =
+          "translate(-50%,-90px) scale(0.9)";
+
+      }, 3000);
+
+      // ❌ ELIMINAR
+      setTimeout(() => {
+
+        msg.remove();
+
+      }, 4500);
+
+      // ⏳ ESPERA
+      setTimeout(() => {
+
+        bloqueado = false;
+
+      }, 1200);
+
+    }
+
+  );
 
 }
-
-`;
-
-document.head.appendChild(glitchStyle);

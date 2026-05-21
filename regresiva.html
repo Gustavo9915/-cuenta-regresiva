@@ -6,113 +6,135 @@
   <meta charset="UTF-8">
 
   <meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0">
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
 
-  <title>Aniversario</title>
+  <title>🎂 Cumpleaños Especial 🎂</title>
 
   <!-- 🎨 CSS -->
   <link
-  rel="stylesheet"
-  href="regresiva.css">
+    rel="stylesheet"
+    href="regresiva.css">
 
   <!-- ✨ FUENTE -->
   <link
-  rel="preconnect"
-  href="https://fonts.googleapis.com">
+    rel="preconnect"
+    href="https://fonts.googleapis.com">
 
   <link
-  rel="preconnect"
-  href="https://fonts.gstatic.com"
-  crossorigin>
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin>
 
   <link
-  href="https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Cursive:wght@400..700&display=swap"
-  rel="stylesheet">
+    href="https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Cursive:wght@400..700&display=swap"
+    rel="stylesheet">
 
   <!-- 💖 ICONO -->
   <link
-  rel="icon"
-  href="img/jackie.jpg">
+    rel="icon"
+    href="img/jackie.jpg">
 
 </head>
 
 <body>
+
+  <!-- ✨ BRILLO -->
+  <div class="overlayGlow"></div>
+
   <!-- 🎵 MUSICA -->
-<!--<iframe
-  id="musicaYT"
-  width="0"
-  height="0"
-  src="https://www.youtube.com/embed/2RhdSubnQCA?autoplay=1&loop=1&playlist=2RhdSubnQCA"
-  frameborder="0"
-  allow="autoplay">
-</iframe>-->
 
   <!-- 📦 CONTENEDOR -->
   <div class="contenedor">
 
-    <!-- 💐 TITULO -->
+    <!-- 🎂 TITULO -->
     <h1 id="tituloEvento">
-      🎉 Aniversario de la Página 🎉
+
+      🎂 Cumpleaños de mi hermana 🎂
+
     </h1>
+
+    <!-- ✨ SUBTITULO -->
+    <p class="subtitulo">
+
+      💖 Un pequeño evento especial 💖
+
+    </p>
 
     <!-- ⏳ TEXTO -->
     <p class="textoDisponible">
-      Disponible en:
+
+      ⏳ Falta para el gran momento:
+
     </p>
 
     <!-- ⏳ CONTADOR -->
     <div id="contador">
+
       Cargando...
+
     </div>
 
     <!-- 💖 FRASE -->
     <p class="frase">
-      Gracias por acompañarme todo este tiempo 💖
+
+      🎈 Gracias por compartir este día ✨
+
     </p>
 
-    <!-- 👀 MISTERIO -->
+    <!-- 🎂 EXTRA -->
+    <p class="cumpleExtra">
+
+      💖 Espero que este mini evento te saque una sonrisa 💖
+
+    </p>
+
+    <!-- 👀 MENSAJE -->
     <p class="misterio">
-      👀 Algunos secretos aparecerán antes del aniversario…
+
+      👀 Algo especial aparecerá cuando llegue el momento...
+
     </p>
 
     <!-- 💬 MENSAJES -->
     <p id="randomMsg"></p>
 
-    <!-- 🔘 BOTÓN -->
-    <ul>
+    <!-- 🎁 BOTONES -->
+    <div class="botonesExtra">
 
-      <li>
-
-        <a
+      <a
         href="tienda.html"
         id="linkEvento"
         class="bloqueado"
         target="_blank">
 
-          <button class="boton_menu">
+        <button class="boton_menu">
 
-            Evento
+          🎉 Evento
 
-          </button>
+        </button>
 
-        </a>
+      </a>
 
-      </li>
+      
 
-    </ul>
+    </div>
 
   </div>
 
   <!-- 👀 MENSAJE OCULTO -->
   <div id="mensajeSecreto">
 
-    👀 Prepárate… algo especial está por venir 🎉
+    🎂 Feliz cumpleaños 💖
 
   </div>
+
+  <!-- ✨ EFECTO -->
+  <div class="stars"></div>
 
   <!-- 🚀 JS -->
   <script src="regresiva.js"></script>
 
 </body>
+
 </html>
