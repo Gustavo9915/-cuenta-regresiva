@@ -735,3 +735,26 @@ img{
   }
 
 }
+@keyframes latidoFuerte{
+
+  0%{
+    transform:scale(1);
+  }
+
+  20%{
+    transform:scale(1.18);
+  }
+
+  40%{
+    transform:scale(0.92);
+  }
+
+  60%{
+    transform:scale(1.15);
+  }
+
+  100%{
+    transform:scale(1);
+  }
+
+}

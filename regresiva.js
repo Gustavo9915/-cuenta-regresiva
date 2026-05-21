@@ -20,6 +20,7 @@ window.onload = () => {
   efectoCursor();
 
   clickSecretos();
+  cartaEspecial();
 
 };
 
@@ -591,5 +592,214 @@ function clickSecretos() {
     }
 
   );
+
+}
+// ======================================
+// 💌 CARTA ESPECIAL
+// ======================================
+
+function cartaEspecial() {
+
+  const btn =
+    document.getElementById(
+      "btnCarta"
+    );
+
+  if (!btn) return;
+
+  btn.addEventListener(
+    "click",
+
+    () => {
+
+      // 👀 evitar duplicados
+      if (
+        document.getElementById(
+          "cartaPopup"
+        )
+      ) return;
+
+      // ======================================
+      // 📦 CARTA
+      // ======================================
+
+      const carta =
+        document.createElement(
+          "div"
+        );
+
+      carta.id =
+        "cartaPopup";
+
+      carta.innerHTML =
+      `
+      <div style="
+        font-size:1.2em;
+        margin-bottom:20px;
+      ">
+
+        💌 Feliz Cumpleaños 💌
+
+      </div>
+
+      <div style="
+        font-size:0.5em;
+        line-height:1.8;
+      ">
+
+        🎂 Espero que tengas
+        un día increíble ✨
+
+        <br><br>
+
+        💖 Gracias por todos
+        los momentos bonitos
+        y por ser tan especial
+
+        <br><br>
+
+        🎈 Hoy todo esto
+        fue hecho para ti
+
+      </div>
+
+      <br>
+
+      <button id="cerrarCarta">
+
+        Cerrar
+
+      </button>
+      `;
+
+      carta.style =
+      `
+      position:fixed;
+
+      top:50%;
+      left:50%;
+
+      transform:
+        translate(-50%,-50%);
+
+      background:
+        rgba(0,0,0,0.92);
+
+      color:white;
+
+      padding:35px;
+
+      border-radius:25px;
+
+      text-align:center;
+
+      z-index:999999;
+
+      font-size:2em;
+
+      max-width:600px;
+
+      backdrop-filter:blur(8px);
+
+      box-shadow:
+        0 0 20px #ff4d88,
+        0 0 35px white;
+
+      animation:
+        aparecer 0.7s ease;
+      `;
+
+      document.body.appendChild(
+        carta
+      );
+
+      // ======================================
+      // ❌ BOTON CERRAR
+      // ======================================
+
+      const cerrar =
+        document.getElementById(
+          "cerrarCarta"
+        );
+
+      cerrar.style =
+      `
+      margin-top:15px;
+
+      padding:12px 20px;
+
+      border:none;
+
+      border-radius:15px;
+
+      background:#ff4d88;
+
+      color:white;
+
+      cursor:pointer;
+
+      font-size:18px;
+      `;
+
+      cerrar.addEventListener(
+        "click",
+
+        () => {
+
+          carta.style.transition =
+            "0.5s";
+
+          carta.style.opacity =
+            "0";
+
+          carta.style.transform =
+            "translate(-50%,-50%) scale(0.8)";
+
+          setTimeout(() => {
+
+            carta.remove();
+
+          }, 500);
+
+        }
+
+      );
+
+    }
+
+  );
+
+}
+// ======================================
+// 📅 DETECTAR HOY
+// ======================================
+
+const hoy =
+  new Date();
+
+const diaActual =
+  hoy.getDate();
+
+const mesActual =
+  hoy.getMonth() + 1;
+
+// 🎂 SI ES HOY
+if (
+  diaActual === 21 &&
+  mesActual === 5
+) {
+
+  contador.style.animation =
+    "latidoFuerte 0.55s infinite";
+
+  contador.style.color =
+    "#ffb6c1";
+
+  contador.style.textShadow =
+  `
+  0 0 10px #ff4d88,
+  0 0 25px white,
+  0 0 45px #ff4d88
+  `;
 
 }
